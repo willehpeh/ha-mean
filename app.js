@@ -11,7 +11,6 @@ var config = require('./config/config');
 mongoose.connect(config.db_url);
 var Project = require('./app/models/project');
 var User = require('./app/models/user');
-var Paragraph = require('./app/models/paragraph');
 var Post = require('./app/models/post');
 
 var routes = require('./routes/index');
