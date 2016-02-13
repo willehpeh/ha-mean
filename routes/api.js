@@ -3,7 +3,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Project = require('./app/models/project');
 var User = require('./app/models/user');
-var Paragraph = require('./app/models/paragraph');
 var Post = require('./app/models/post');
 
 // =============================================================================
