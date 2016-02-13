@@ -2,8 +2,8 @@ doctype html
 html
   head
     title HA Architecture - {{title}}
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous")
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
   body
     nav
       a(href="/") Accueil
@@ -11,3 +11,8 @@ html
       a(href="/agency") L'agence
       a(href="/projects") Nos projets
     block content
+
+  script(src="/libs/jquery/dist/jquery.min.js")
+  script(src="/javascripts/functions.js")
+  script(src="/libs/angular/angular.min.js")
+  script(src="/libs/angular-route/angular-route.min.js")
