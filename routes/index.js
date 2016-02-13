@@ -21,4 +21,10 @@ router.get('/projects', function(req, res, next) {
   res.render('projects', { title: 'Projets' });
 });
 
+// Render Jade partials as HTML for Angular frontend
+router.get('/partials/:name', function (req, res)
+ { var name = req.params.name;
+   res.render('partials/' + name);
+});
+
 module.exports = router;
