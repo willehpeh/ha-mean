@@ -1,0 +1,15 @@
+$phone-width: 480px
+$tablet-width: 750px
+$desktop-width: 1200px
+
+@mixin phone
+  @media (max-width: #{$tablet-width - 1})
+    @content
+
+@mixin tablet
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px})
+    @content
+
+@mixin desktop
+  @media (min-width: #{$desktop-width})
+    @content
