@@ -5,7 +5,7 @@ html(ng-app="ha-mean-angular")
     link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
     link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
     link(rel="stylesheet" href="/stylesheets/main.min.css")
-  body
+  body(ng-controller="LoginCtrl")
     .logo-container
     .full-page-container
       .login-form-container
@@ -15,15 +15,18 @@ html(ng-app="ha-mean-angular")
             form(name="loginForm")
               label Nom d'utilisateur
               br
-              input(type="text" placeholder="Nom d'utilisateur")
+              input(type="text" placeholder="Nom d'utilisateur" ng-model="username" required)
               br
               label Mot de passe
               br
-              input(type="text" placeholder="Mot de passe")
+              input(type="password" placeholder="Mot de passe" ng-model="password" required)
               br
-              button(type="button" class="btn btn-success") Accéder au Dashboard
+              button(type="submit" class="btn btn-success" ng-disabled="loginForm.$invalid" ng-click="login()") Accéder au Dashboard
+            p {{ errorMessage }}
 
   script(src="/libs/jquery/dist/jquery.min.js")
   script(src="/javascripts/functions.js")
   script(src="/libs/angular/angular.min.js")
   script(src="/libs/angular-route/angular-route.min.js")
+  script(src="/javascripts/app.js")
+  script(src="/javascripts/controllers/LoginCtrl.js")

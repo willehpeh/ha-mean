@@ -1,1 +1,1 @@
-var app = angular.module('ha-mean-angular', ['ngRoute']);
+angular.module('ha-mean-angular', ['ngRoute']);
