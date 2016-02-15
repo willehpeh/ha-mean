@@ -4,12 +4,9 @@ html(ng-app="ha-mean-angular")
     title HA Architecture - #{title}
     link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
     link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
+    link(rel="stylesheet" href="/stylesheets/main.min.css")
   body
-    nav
-      a(href="/") Accueil
-      a(href="/news") Nos actualités
-      a(href="/agency") L'agence
-      a(href="/projects") Nos projets
+    include ./partials/_overlay.jade
     block content
 
   script(src="/libs/jquery/dist/jquery.min.js")
