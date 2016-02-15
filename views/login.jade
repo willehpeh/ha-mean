@@ -1,0 +1,29 @@
+doctype html
+html(ng-app="ha-mean-angular")
+  head
+    title HA Architecture - #{title}
+    link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
+    link(rel="stylesheet" href="/stylesheets/main.min.css")
+  body
+    .logo-container
+    .full-page-container
+      .login-form-container
+        .login-form-content
+          .login-person-icon.fa.fa-user.fa-5x
+          .login-form-inputs
+            form(name="loginForm")
+              label Nom d'utilisateur
+              br
+              input(type="text" placeholder="Nom d'utilisateur")
+              br
+              label Mot de passe
+              br
+              input(type="text" placeholder="Mot de passe")
+              br
+              button(type="button" class="btn btn-success") Accéder au Dashboard
+
+  script(src="/libs/jquery/dist/jquery.min.js")
+  script(src="/javascripts/functions.js")
+  script(src="/libs/angular/angular.min.js")
+  script(src="/libs/angular-route/angular-route.min.js")

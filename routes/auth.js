@@ -51,6 +51,9 @@ router.route('/signup')
   });
 
 router.route('/login')
+  .get(function(req, res, next) {
+    res.render('login', {title: "Login"});
+  })
   .post(function(req, res, next) {
 
     // Retrieve username and password from request
