@@ -6,7 +6,7 @@ function LoginCtrl($scope, $http) {
       '/auth/login',
       {username: $scope.username, password: $scope.password})
       .then(function(data) {
-        $scope.errorMessage = data.data.message;
+        $http.get('/dashboard', { headers : { 'X-Access-Token' : data.data.token }});
       }, function(data) {
         $scope.errorMessage = data.data.message;
       });
