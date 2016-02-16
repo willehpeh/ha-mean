@@ -46,8 +46,7 @@ router.route('/projects')
     if(
       !req.body.name ||
       !req.body.family ||
-      !req.body.description ||
-      !req.body.partner
+      !req.body.description
     ) {
        return res.render('error', {
         message : "Mandatory fields not completed.",
@@ -57,7 +56,9 @@ router.route('/projects')
     project.name = req.body.name;
     project.family = req.body.family;
     project.description = req.body.description;
+    if(req.body.partner) {
     project.partner = req.body.partner;
+    }
     if(req.body.reference) {
       project.reference = req.body.reference;
     }
@@ -77,8 +78,10 @@ router.route('/projects')
       project.date_completed = req.body.date_completed;
     }
     if(req.body.photo) {
-      projectPhotos.push(req.body.photo);
-      project.photos = projectPhotos;
+      project.photos.push(req.body.photo);
+    }
+    if(!req.body.photo) {
+      project.photos.push("/images/placeholder.jpg");
     }
     project.save(function(err, project) {
       if(err) {
@@ -140,8 +143,7 @@ router.route('/projects/:id')
         project.date_completed = req.body.date_completed;
       }
       if(req.body.photo) {
-        projectPhotos.push(req.body.photo);
-        project.photos = projectPhotos;
+        project.photos.push(req.body.photo);
       }
       project.save(function(err, project) {
         if(err) {
