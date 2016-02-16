@@ -8,7 +8,7 @@ function LoginCtrl($scope, $http, store, $window) {
       .then(function(data) {
         var userToken = data.data.token;
         store.set('token', userToken);
-        $window.location.href = '/dashboard?token=' + userToken;
+        $window.location.href = '/dashboard?token=' + store.get('token');
       }, function(data) {
         $scope.errorMessage = data.data.message;
       });

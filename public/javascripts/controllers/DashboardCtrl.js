@@ -1,6 +1,6 @@
 angular.module('ha-mean-angular', ['angular-storage']).controller('DashboardCtrl', DashboardCtrl);
 
-function DashboardCtrl($scope, $http) {
+function DashboardCtrl($scope, $http, store, $window) {
   $scope.title = "Dashboard";
   $http.get('/api/projects/').then(
     function(data) {
@@ -16,4 +16,8 @@ function DashboardCtrl($scope, $http) {
       console.log(data);
     }
   );
+  $scope.logout = function() {
+    store.remove('token');
+    $window.location.href = "/auth/login";
+  }
 }

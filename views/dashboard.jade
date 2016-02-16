@@ -7,6 +7,7 @@ html(ng-app="ha-mean-angular")
     link(rel="stylesheet" href="/stylesheets/main.min.css")
   body(ng-controller="DashboardCtrl")
     h1(align="center") {{title}}
+    button.logout.btn.btn-danger(ng-click="logout()") Sign out
     .dashboard-container
       .dashboard-news
         .dashboard-post(ng-repeat="post in posts")
