@@ -26,8 +26,17 @@ function ProjectsCtrl($scope, $http) {
   );
 }
 
-function ProjectDetailCtrl($scope, $http, $routeParams) {
-
+function ProjectDetailCtrl($scope, $http, $window, $location) {
+  var id = $window.location.search;
+  id = id.substring(4,id.length);
+  $http.get('/api/projects/' + id).then(
+    function(data) {
+      $scope.project = data.data;
+      console.log($scope.project);
+    }, function(data) {
+      console.log(data.data);
+    }
+  );
 }
 
 function NewsCtrl($scope, $http) {
@@ -41,6 +50,15 @@ function NewsCtrl($scope, $http) {
   );
 }
 
-function PostCtrl($scope, $http, $routeParams) {
-
+function PostCtrl($scope, $http, $window, $location) {
+  var id = $window.location.search;
+  id = id.substring(4, id.length);
+  $http.get('/api/news/' + id).then(
+    function(data) {
+      $scope.post = data.data;
+      console.log($scope.post);
+    }, function(data) {
+      console.log(data.data);
+    }
+  )
 }

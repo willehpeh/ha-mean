@@ -12,6 +12,14 @@ router.get('/projects', function(req, res, next) {
   res.render('projects');
 });
 
+router.get('/project-detail', function(req, res, next) {
+  res.render('project-detail');
+});
+
+router.get('/news-detail', function(req, res, next) {
+  res.render('news-detail');
+});
+
 router.get('/news', function(req, res, next) {
   res.render('news');
 });

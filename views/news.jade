@@ -2,4 +2,8 @@ extends layout
 
 block content
   .container-fluid(ng-controller="NewsCtrl")
-    h1 Nos actualités
+    h1(align="center") Nos actualités
+    .news-grid
+      .news-item(ng-repeat="post in news")
+        h3 {{post.title}}
+        p {{post.text}}
