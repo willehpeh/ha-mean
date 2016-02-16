@@ -2,8 +2,8 @@ extends layout
 
 block content
   .container-fluid(ng-controller="ProjectsCtrl")
-    h1(align="center") Nos projets
+    h1.page-title Nos projets
     .project-grid
-      .grid-project(ng-repeat="project in projects")
-        h2 {{project.name}}
-        a(href="/project-detail?id={{project._id}}") Consulter
+      .project-grid-item(ng-repeat="project in projects" ng-style="{'background-image': 'url(' + project.photos[0] + ')'}")
+        .project-grid-item-overlay(ng-click="openProject(project._id)")
+          h4.title {{project.name}}

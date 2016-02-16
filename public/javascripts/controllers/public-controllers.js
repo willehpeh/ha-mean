@@ -15,7 +15,7 @@ function HomeCtrl($scope, $http) {
   );
 }
 
-function ProjectsCtrl($scope, $http) {
+function ProjectsCtrl($scope, $http, $window) {
   $http.get('/api/projects').then(
     function(data) {
       console.log(data.data);
@@ -24,6 +24,9 @@ function ProjectsCtrl($scope, $http) {
       console.log(data.data);
     }
   );
+  $scope.openProject = function(id) {
+    $window.location.href = "/project-detail/?id=" + id;
+  }
 }
 
 function ProjectDetailCtrl($scope, $http, $window, $location) {
