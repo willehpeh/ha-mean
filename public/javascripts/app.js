@@ -1,1 +1,1 @@
-angular.module('ha-mean-angular', ['ngRoute']);
+angular.module('ha-mean-angular', ['ngRoute', 'angular-storage'])

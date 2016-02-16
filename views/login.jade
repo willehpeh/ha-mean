@@ -23,10 +23,12 @@ html(ng-app="ha-mean-angular")
               br
               button(type="submit" class="btn btn-success" ng-disabled="loginForm.$invalid" ng-click="login()") Accéder au Dashboard
             p {{ errorMessage }}
+            p= errorMessage
 
   script(src="/libs/jquery/dist/jquery.min.js")
   script(src="/javascripts/functions.js")
   script(src="/libs/angular/angular.min.js")
   script(src="/libs/angular-route/angular-route.min.js")
+  script(src="/libs/a0-angular-storage/dist/angular-storage.min.js")
   script(src="/javascripts/app.js")
   script(src="/javascripts/controllers/LoginCtrl.js")

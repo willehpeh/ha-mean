@@ -15,8 +15,7 @@ router.use(function(req, res, next) {
       if (err) {
         return res.status(403).send({ success: false, message: 'Failed to authenticate token.' });
       } else {
-        // if everything is good, save to request for use in other routes
-        return res.status(200).send({ success: true, token: decoded, message: "Token verified."});
+        req.body.token = token;
         next();
       }
     });
@@ -25,10 +24,7 @@ router.use(function(req, res, next) {
 
     // if there is no token
     // return an error
-    return res.status(403).send({
-        success: false,
-        message: 'No token provided.'
-    });
+    return res.render('login', {errorMessage: "Not logged in."});
   }
 });
 

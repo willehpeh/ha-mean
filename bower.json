@@ -1,11 +1,12 @@
 {
-    "name": "ha-mean",
-    "version": "0.0.1",
-    "dependencies": {
-        "bootstrap": "latest",
-        "font-awesome": "latest",
-        "animate.css": "latest",
-        "angular": "latest",
-        "angular-route": "latest"
-    }
+  "name": "ha-mean",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "a0-angular-storage": "^0.0.13"
+  }
 }

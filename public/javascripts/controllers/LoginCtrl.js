@@ -1,12 +1,14 @@
-angular.module('ha-mean-angular').controller('LoginCtrl', LoginCtrl);
+angular.module('ha-mean-angular', ['angular-storage']).controller('LoginCtrl', LoginCtrl);
 
-function LoginCtrl($scope, $http) {
+function LoginCtrl($scope, $http, store, $window) {
   $scope.login = function() {
     $http.post(
       '/auth/login',
       {username: $scope.username, password: $scope.password})
       .then(function(data) {
-        $http.get('/dashboard', { headers : { 'X-Access-Token' : data.data.token }});
+        var userToken = data.data.token;
+        store.set('token', userToken);
+        $window.location.href = '/dashboard?token=' + userToken;
       }, function(data) {
         $scope.errorMessage = data.data.message;
       });
