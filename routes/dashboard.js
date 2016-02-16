@@ -4,10 +4,9 @@ var jwt = require('jsonwebtoken');
 
 var config = require('../config/config');
 
+// Authentication middleware
 router.use(function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-  // decode token
   if (token) {
 
     // verifies secret and checks exp
@@ -28,6 +27,7 @@ router.use(function(req, res, next) {
   }
 });
 
+// GET dashboard page
 router.get('/', function(req, res) {
   res.render('dashboard', {title: "Dashboard"});
 });
