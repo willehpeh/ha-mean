@@ -7,3 +7,4 @@ block content
       .news-item(ng-repeat="post in news")
         h3 {{post.title}}
         p {{post.text}}
+        a(href="/news-detail?=id{{post._id}}") Consulter

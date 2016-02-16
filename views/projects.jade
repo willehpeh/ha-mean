@@ -6,3 +6,4 @@ block content
     .project-grid
       .grid-project(ng-repeat="project in projects")
         h2 {{project.name}}
+        a(href="/project-detail?id={{project._id}}") Consulter
