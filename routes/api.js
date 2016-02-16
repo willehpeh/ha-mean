@@ -5,6 +5,17 @@ var Project = require('../app/models/project');
 var User = require('../app/models/user');
 var Post = require('../app/models/post');
 
+router.route('/home')
+  .get(function(req, res, next) {
+    Project.find({
+      front_page: true
+    }, function(err, data) {
+      if(err) {
+        res.status(500).send(err);
+      }
+      res.send(data);
+    });
+  });
 // =============================================================================
 //                                 PROJECTS
 // =============================================================================
