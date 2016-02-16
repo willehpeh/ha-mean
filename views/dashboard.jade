@@ -6,7 +6,7 @@ html(ng-app="ha-mean-angular")
     link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
     link(rel="stylesheet" href="/stylesheets/main.min.css")
   body(ng-controller="DashboardCtrl")
-    h1.page-title {{title}}
+    h1(align="center") {{title}}
     button.logout.btn.btn-danger(ng-click="logout()") Sign out
     .dashboard-container
       .dashboard-news
