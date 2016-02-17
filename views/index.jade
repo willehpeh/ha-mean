@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .full-page-container(ng-controller="HomeCtrl")
+  .full-page-container(ng-controller="HomeCtrl" ng-style="{'background-image' : 'url(' + backgroundPhoto + ')'}")
     .slogan
       h1 H&A Architecture
       h3 Du premier coup de crayon à la pose de la dernière pierre

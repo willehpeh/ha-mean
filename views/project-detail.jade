@@ -1,5 +1,5 @@
 extends layout
 
 block content
-  .container-fluid(ng-controller="ProjectDetailCtrl")
-    h1.page-title {{project.name}}
+  .full-page-container(ng-controller="ProjectDetailCtrl" ng-style="{'background-image' : 'url(' + backgroundPhoto + ')'}")
+    h1.page-title.white-text.shadow {{project.name}}

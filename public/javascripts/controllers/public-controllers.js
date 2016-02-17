@@ -8,11 +8,7 @@ function HomeCtrl($scope, $http) {
   $http.get('/api/home').then(
     function(data) {
       $scope.data = data.data;
-      for(i=0;i<$scope.data.length;i++) {
-        for(j=0;j<$scope.data[i].photos.length;j++) {
-          console.log($scope.data[i].photos[j]);
-        }
-      }
+      $scope.backgroundPhoto = $scope.data[0].photos[0];
     }, function(data) {
       console.log(data.data);
     }
@@ -40,6 +36,7 @@ function ProjectDetailCtrl($scope, $http, $window, $location) {
     function(data) {
       $scope.project = data.data;
       console.log($scope.project);
+      $scope.backgroundPhoto = $scope.project.photos[0];
     }, function(data) {
       console.log(data.data);
     }
