@@ -8,7 +8,11 @@ function HomeCtrl($scope, $http) {
   $http.get('/api/home').then(
     function(data) {
       $scope.data = data.data;
-      console.log($scope.data);
+      for(i=0;i<$scope.data.length;i++) {
+        for(j=0;j<$scope.data[i].photos.length;j++) {
+          console.log($scope.data[i].photos[j]);
+        }
+      }
     }, function(data) {
       console.log(data.data);
     }
