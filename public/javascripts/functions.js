@@ -10,7 +10,7 @@ $('.menu-button').click(function() {
 $('.close-button').click(function() {
   $('.overlay').fadeOut();
   $('#menu').children().fadeOut();
-})
+});
 
 $(document).ready(function() {
 

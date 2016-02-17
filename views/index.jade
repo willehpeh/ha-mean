@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  .loading-screen
+    .loading-animation.fa.fa-circle-o-notch.fa-spin.fa-2x
   .full-page-container(ng-controller="HomeCtrl" ng-style="{'background-image' : 'url(' + backgroundPhoto + ')'}")
     .slogan
       h1 H&A Architecture
