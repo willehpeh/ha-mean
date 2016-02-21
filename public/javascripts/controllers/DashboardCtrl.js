@@ -30,6 +30,7 @@ function DashboardCtrl($scope, $http, store, $window) {
       $('.new-post-form').children().children('.btn').hide();
       $http.post('/api/news', $scope.newPost).then(function() {
         $scope.newPost = {};
+        $('.new-post-form').children().children('.btn').show();
         $('.dashboard-form').hide();
         $('.dashboard-overlay').fadeOut();
         getNews();
@@ -38,6 +39,26 @@ function DashboardCtrl($scope, $http, store, $window) {
       console.log("Missing data.");
     }
   }
+
+  $scope.openModifyPost = function(id) {
+    $('.modify-post-form').show();
+    $('.dashboard-overlay').fadeIn();
+    $http.get('/api/news/' + id).then(function(data) {
+      $scope.modifyPost = data.data;
+    });
+  }
+
+  $scope.updatePost = function(id) {
+    $('.modify-post-form').children().children('.btn').hide();
+    $http.put('/api/news/' + id, $scope.modifyPost).then(function() {
+      $scope.modifyPost = {};
+      $('.modify-post-form').children().children('.btn').show();
+      $('.dashboard-form').hide();
+      $('.dashboard-overlay').fadeOut();
+      getNews();
+    });
+  }
+
   $scope.confirmDeletePost = function(id) {
     var postToDelete = $('#' + id);
     var deleteButton = postToDelete.children('.delete-post');
