@@ -1,3 +1,9 @@
+@keyframes spinner
+  0%
+    transform: translate(-50%, -50%) rotate(0deg)
+  100%
+    transform: translate(-50%, -50%) rotate(360deg)
+
 .dashboard-news
   width: 45%
   height: 90vh
@@ -11,11 +17,38 @@
   overflow: scroll
 
 .dashboard-project
-  border: thin solid #AAA
+  position: relative
+  white-space: pre-wrap
+  margin-bottom: 50px
 
 .dashboard-post
-  border: thin solid #AAA
-  white-space: pre
+  position: relative
+  white-space: pre-wrap
+  margin-bottom: 50px
+
+.delete-confirm
+  position: absolute
+  display: none
+  width: 0px
+  height: 100%
+  right: 0
+  background-color: darken(red, 10%)
+  color: white
+  transition: all 0.3s ease
+  &:hover
+    background-color: red
+    cursor: pointer
+  .is-showing
+    width: 50px
+
+.delete-confirm-cross
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+.spinning
+  animation: spinner 1s linear infinite
 
 .logout
   position: fixed

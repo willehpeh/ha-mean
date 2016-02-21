@@ -29,9 +29,12 @@ html(ng-app="ha-mean-angular")
     .dashboard-container
       .dashboard-news
         .new-post.dashboard-add-button.fa.fa-plus-circle.fa-3x
-        .dashboard-post(ng-repeat="post in posts")
+        .dashboard-post(ng-repeat="post in posts" id="{{post._id}}")
+          .delete-confirm(ng-click="deletePost(post._id)")
+            .delete-confirm-cross.fa.fa-close
           h3 {{post.title}}
           p {{post.text}}
+          button.btn.btn-danger.delete-post(ng-click="confirmDeletePost(post._id)") Supprimer
       .dashboard-projects
         .new-project.dashboard-add-button.fa.fa-plus-circle.fa-3x
         .dashboard-project(ng-repeat="project in projects")

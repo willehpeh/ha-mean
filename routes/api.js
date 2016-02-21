@@ -245,7 +245,7 @@ router.route('/news/:id')
   .delete(function(req, res, next) {
     Post.remove({_id: req.params.id}, function(err) {
       if(err) {
-        res.send(500, err);
+        res.send(err);
       }
       res.send("Post removed.")
     });
