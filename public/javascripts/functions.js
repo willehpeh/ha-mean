@@ -12,6 +12,14 @@ $('.close-button').click(function() {
   $('#menu').children().fadeOut();
 });
 
+$('.info-button').click(function() {
+  $('.project-overlay').fadeIn();
+});
+
+$('.project-overlay-close').click(function() {
+  $('.project-overlay').fadeOut();
+});
+
 $(document).ready(function() {
 
 });

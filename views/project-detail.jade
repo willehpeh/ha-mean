@@ -6,3 +6,10 @@ block content
   .full-page-container(ng-controller="ProjectDetailCtrl" ng-style="{'background-image' : 'url(' + backgroundPhoto + ')'}")
     h1.page-title.white-text.shadow {{project.name}}
     .info-button.fa.fa-info.fa-2x.shadow
+    .project-overlay
+      h2 {{project.name}}
+      h4 {{project.family}}
+      p {{project.description}}
+      p
+        small Partenaire : {{project.partner}}
+      .fa.fa-close.project-overlay-close
