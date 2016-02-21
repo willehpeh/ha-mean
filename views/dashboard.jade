@@ -6,14 +6,34 @@ html(ng-app="ha-mean-angular")
     link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
     link(rel="stylesheet" href="/stylesheets/main.min.css")
   body(ng-controller="DashboardCtrl")
+    .dashboard-overlay
+      .dashboard-form.new-post-form
+        h3 Nouvel article
+        form(name="newPost")
+        label Titre
+        br
+        input(type="text" ng-model="newPost.title" placeholder="Votre titre ici")
+        br
+        label Texte
+        br
+        textarea(cols="50" rows="10" ng-model="newPost.text" placeholder="Votre texte ici")
+        br
+        br
+        button.btn.btn-success(ng-click="saveNewPost()") Enregistrer
+        button.btn.btn-danger.close-dashboard-overlay Annuler
+      //.dashboard-form.modify-post-form
+      //.dashboard-form.new-project-form
+      //.dashboard-form.modify-project-form
     h1(align="center") {{title}}
     button.logout.btn.btn-danger(ng-click="logout()") Sign out
     .dashboard-container
       .dashboard-news
+        .new-post.dashboard-add-button.fa.fa-plus-circle.fa-3x
         .dashboard-post(ng-repeat="post in posts")
           h3 {{post.title}}
           p {{post.text}}
       .dashboard-projects
+        .new-project.dashboard-add-button.fa.fa-plus-circle.fa-3x
         .dashboard-project(ng-repeat="project in projects")
           h3 {{project.name}}
           p Famille: {{project.family}}

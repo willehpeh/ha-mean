@@ -20,6 +20,16 @@ $('.project-overlay-close').click(function() {
   $('.project-overlay').fadeOut();
 });
 
+$('.close-dashboard-overlay').click(function() {
+  $('.dashboard-form').hide();
+  $('.dashboard-overlay').fadeOut();
+});
+
+$('.new-post').click(function() {
+  $('.new-post-form').show();
+  $('.dashboard-overlay').fadeIn();
+});
+
 $(document).ready(function() {
 
 });
