@@ -9,17 +9,17 @@ html(ng-app="ha-mean-angular")
     .dashboard-overlay
       .dashboard-form.new-post-form
         h3 Nouvel article
-        form(name="newPost")
+        form(name="newPostForm")
         label Titre
         br
-        input(type="text" ng-model="newPost.title" placeholder="Votre titre ici")
+        input(type="text" ng-model="newPost.title" placeholder="Votre titre ici" required)
         br
         label Texte
         br
         textarea(cols="50" rows="10" ng-model="newPost.text" placeholder="Votre texte ici")
         br
         br
-        button.btn.btn-success(ng-click="saveNewPost()") Enregistrer
+        button.btn.btn-success(ng-click="saveNewPost()" ng-disabled="newPostForm.$invalid") Enregistrer
         button.btn.btn-danger.close-dashboard-overlay Annuler
       //.dashboard-form.modify-post-form
       //.dashboard-form.new-project-form
