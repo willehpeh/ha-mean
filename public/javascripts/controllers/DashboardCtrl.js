@@ -149,4 +149,23 @@ function DashboardCtrl($scope, $http, store, $window) {
       console.log("Missing data.");
     }
   }
+
+  $scope.openModifyProject = function(id) {
+    $('.modify-project-form').show();
+    $('.dashboard-overlay').fadeIn();
+    $http.get('/api/projects/' + id).then(function(data) {
+      $scope.modifyProject = data.data;
+    });
+  }
+
+  $scope.updateProject = function(id) {
+    $('.modify-project-form').children().children('.btn').hide();
+    $http.put('/api/projects/' + id, $scope.modifyProject).then(function() {
+      $scope.modifyProject = {};
+      $('.modify-project-form').children().children('.btn').show();
+      $('.dashboard-form').hide();
+      $('.dashboard-overlay').fadeOut();
+      getProjects();
+    });
+  }
 }

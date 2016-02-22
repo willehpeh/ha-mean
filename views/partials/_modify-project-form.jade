@@ -1,0 +1,44 @@
+.dashboard-form.modify-project-form
+  h3 Modifier Projet
+  form(name="modifyProjectForm")
+    label ID
+    br
+    input(type="text" ng-model="modifyProject._id" disabled)
+    br
+    label Nom du projet
+    br
+    input(type="text" ng-model="modifyProject.name" required)
+    br
+    label Famille
+    br
+    select(ng-model="modifyProject.family" required)
+      option(value="Logements") Logements
+      option(value="Industriel") Industriel
+      option(value="Bat-Public") Bâtiment public
+    br
+    label Description
+    br
+    textarea(cols="50" rows="10" ng-model="modifyProject.description" placeholder="Votre texte ici" required)
+    br
+    label Partenaire
+    br
+    input(type="text" ng-model="modifyProject.partner")
+    br
+    label Référence
+    br
+    input(type="text" ng-model="modifyProject.reference")
+    br
+    label Les photos apparaissent sur la page d'accueil
+    input(type="checkbox" ng-model="modifyProject.front_page")
+    br
+    label Date de début de projet
+    br
+    input(type="date" ng-model="modifyProject.date_started")
+    br
+    label Date de fin de projet
+    br
+    input(type="date" ng-model="modifyProject.date_completed")
+    br
+    br
+    button.btn.btn-success(type="submit" ng-click="updateProject(modifyProject._id)" ng-disabled="modifyProjectForm.$invalid") Enregistrer
+    button.btn.btn-danger.close-dashboard-overlay Annuler

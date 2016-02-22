@@ -112,8 +112,7 @@ router.route('/projects/:id')
       if(
         !req.body.name ||
         !req.body.family ||
-        !req.body.description ||
-        !req.body.partner
+        !req.body.description
       ) {
          return res.render('error', {
           message : "Mandatory fields not completed.",
@@ -123,16 +122,16 @@ router.route('/projects/:id')
       project.name = req.body.name;
       project.family = req.body.family;
       project.description = req.body.description;
-      project.partner = req.body.partner;
+      if(req.body.partner) {
+        project.partner = req.body.partner;
+      }
       if(req.body.reference) {
         project.reference = req.body.reference;
       }
       if(req.body.news) {
       project.news = req.body.news;
       }
-      if(req.body.front_page) {
       project.front_page = req.body.front_page;
-      }
       if(req.body.front_page_order) {
       project.front_page_order = req.body.front_page_order;
       }
