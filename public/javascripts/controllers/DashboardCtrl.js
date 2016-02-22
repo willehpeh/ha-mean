@@ -1,6 +1,6 @@
-angular.module('ha-mean-angular', ['angular-storage']).controller('DashboardCtrl', DashboardCtrl);
+angular.module('ha-mean-angular', ['angular-storage', 'ngFileUpload']).controller('DashboardCtrl', DashboardCtrl);
 
-function DashboardCtrl($scope, $http, store, $window) {
+function DashboardCtrl($scope, $http, store, $window, Upload) {
 
   $scope.title = "Dashboard";
 
