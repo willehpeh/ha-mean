@@ -36,6 +36,9 @@ html(ng-app="ha-mean-angular")
           p Réf: {{project.reference}}
           p Partenaire: {{project.partenaire}}
           p Projet démarré le {{project.date_started}}
+          img(ng-repeat="photo in project.photos" ng-src="{{photo}}" width="80px" height="60px")
+          br
+          br
           button.btn.btn-success.modify-project(ng-click="openModifyProject(project._id)") Modifier
           button.btn.btn-danger.delete-project(ng-click="confirmDeleteProject(project._id)") Supprimer
 
