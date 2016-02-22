@@ -1,0 +1,14 @@
+.dashboard-form.new-post-form
+  h3 Nouvel article
+  form(name="newPostForm")
+    label Titre
+    br
+    input(type="text" ng-model="newPost.title" placeholder="Votre titre ici" required)
+    br
+    label Texte
+    br
+    textarea(cols="50" rows="10" ng-model="newPost.text" placeholder="Votre texte ici" required)
+    br
+    br
+    button.btn.btn-success(type="submit" ng-click="saveNewPost()" ng-disabled="newPostForm.$invalid") Enregistrer
+    button.btn.btn-danger.close-dashboard-overlay Annuler

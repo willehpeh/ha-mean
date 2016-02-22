@@ -1,0 +1,18 @@
+.dashboard-form.modify-post-form
+  h3 Modifier article
+  form(name="modifyPostForm")
+    label ID
+    br
+    input(type="text" ng-model="modifyPost._id" disabled)
+    br
+    label Titre
+    br
+    input(type="text" ng-model="modifyPost.title" required)
+    br
+    label Texte
+    br
+    textarea(cols="50" rows="10" ng-model="modifyPost.text" required)
+    br
+    br
+    button.btn.btn-success(type="submit" ng-click="updatePost(modifyPost._id)" ng-disabled="modifyPostForm.$invalid") Enregistrer
+    button.btn.btn-danger.close-dashboard-overlay Annuler

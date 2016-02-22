@@ -4,13 +4,15 @@ function DashboardCtrl($scope, $http, store, $window) {
 
   $scope.title = "Dashboard";
 
-  $http.get('/api/projects/').then(
-    function(data) {
-      $scope.projects = data.data;
-    }, function(data) {
-      console.log(data);
-    }
-  );
+  var getProjects = function() {
+    $http.get('/api/projects/').then(
+      function(data) {
+        $scope.projects = data.data;
+      }, function(data) {
+        console.log(data);
+      }
+    );
+  }
 
   var getNews = function() {
     $http.get('/api/news').then(function(data) {
@@ -19,6 +21,8 @@ function DashboardCtrl($scope, $http, store, $window) {
       console.log(data);
     });
   }
+
+  getProjects();
   getNews();
 
   $scope.logout = function() {
@@ -92,6 +96,42 @@ function DashboardCtrl($scope, $http, store, $window) {
       .addClass("spinning");
     $http.delete('/api/news/' + id).then(function() {
       getNews();
+    });
+  }
+
+  $scope.confirmDeleteProject = function(id) {
+    var projectToDelete = $('#' + id);
+    var deleteButton = projectToDelete.children('.delete-project');
+    var confirmDelete = projectToDelete.children('.delete-confirm');
+    if(confirmDelete.is(":hidden")) {
+      confirmDelete
+        .show()
+        .animate({"width" : "50px"}, 300, "linear");
+      deleteButton
+        .html("Annuler")
+        .removeClass("btn-danger")
+        .addClass("btn-warning");
+    }
+    else {
+      confirmDelete.animate({"width" : "0px"}, 300, "linear", function() {
+        confirmDelete.hide();
+      });
+      deleteButton
+        .html("Supprimer")
+        .removeClass("btn-warning")
+        .addClass("btn-danger");
+    }
+  }
+
+  $scope.deleteProject = function(id) {
+    var projectToDelete = $('#' + id);
+    var deleteConfirmButton = projectToDelete.children('.delete-confirm').children('.delete-confirm-cross');
+    deleteConfirmButton
+      .removeClass("fa-close")
+      .addClass("fa-spinner")
+      .addClass("spinning");
+    $http.delete('/api/projects/' + id).then(function() {
+      getProjects();
     });
   }
 }

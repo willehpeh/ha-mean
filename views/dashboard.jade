@@ -7,44 +7,15 @@ html(ng-app="ha-mean-angular")
     link(rel="stylesheet" href="/stylesheets/main.min.css")
   body(ng-controller="DashboardCtrl")
     .dashboard-overlay
-      .dashboard-form.new-post-form
-        h3 Nouvel article
-        form(name="newPostForm")
-          label Titre
-          br
-          input(type="text" ng-model="newPost.title" placeholder="Votre titre ici" required)
-          br
-          label Texte
-          br
-          textarea(cols="50" rows="10" ng-model="newPost.text" placeholder="Votre texte ici" required)
-          br
-          br
-          button.btn.btn-success(type="submit" ng-click="saveNewPost()" ng-disabled="newPostForm.$invalid") Enregistrer
-          button.btn.btn-danger.close-dashboard-overlay Annuler
-      .dashboard-form.modify-post-form
-        h3 Modifier article
-        form(name="modifyPostForm")
-          label ID
-          br
-          input(type="text" ng-model="modifyPost._id" disabled)
-          br
-          label Titre
-          br
-          input(type="text" ng-model="modifyPost.title" required)
-          br
-          label Texte
-          br
-          textarea(cols="50" rows="10" ng-model="modifyPost.text" required)
-          br
-          br
-          button.btn.btn-success(type="submit" ng-click="updatePost(modifyPost._id)" ng-disabled="modifyPostForm.$invalid") Enregistrer
-          button.btn.btn-danger.close-dashboard-overlay Annuler
+      include ./partials/_new-post-form.jade
+      include ./partials/_modify-post-form.jade
       //.dashboard-form.new-project-form
       //.dashboard-form.modify-project-form
     h1(align="center") {{title}}
     button.logout.btn.btn-danger(ng-click="logout()") Sign out
     .dashboard-container
       .dashboard-news
+        h2(align="center") Actualités
         .new-post.dashboard-add-button.fa.fa-plus-circle.fa-3x
         .dashboard-post(ng-repeat="post in posts" id="{{post._id}}")
           .delete-confirm(ng-click="deletePost(post._id)")
@@ -54,14 +25,19 @@ html(ng-app="ha-mean-angular")
           button.btn.btn-success.modify-post(ng-click="openModifyPost(post._id)") Modifier
           button.btn.btn-danger.delete-post(ng-click="confirmDeletePost(post._id)") Supprimer
       .dashboard-projects
+        h2(align="center") Projets
         .new-project.dashboard-add-button.fa.fa-plus-circle.fa-3x
-        .dashboard-project(ng-repeat="project in projects")
+        .dashboard-project(ng-repeat="project in projects" id="{{project._id}}")
+          .delete-confirm(ng-click="deleteProject(project._id)")
+            .delete-confirm-cross.fa.fa-close
           h3 {{project.name}}
           p Famille: {{project.family}}
           p Description: {{project.description}}
           p Réf: {{project.reference}}
           p Partenaire: {{project.partenaire}}
           p Projet démarré le {{project.date_started}}
+          button.btn.btn-success.modify-project(ng-click="openModifyProject(project._id)") Modifier
+          button.btn.btn-danger.delete-project(ng-click="confirmDeleteProject(project._id)") Supprimer
 
 
   script(src="/libs/jquery/dist/jquery.min.js")
