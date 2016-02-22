@@ -30,6 +30,11 @@ $('.new-post').click(function() {
   $('.dashboard-overlay').fadeIn();
 });
 
+$('.new-project').click(function() {
+  $('.new-project-form').show();
+  $('.dashboard-overlay').fadeIn();
+});
+
 $(document).ready(function() {
 
 });

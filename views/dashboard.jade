@@ -9,8 +9,8 @@ html(ng-app="ha-mean-angular")
     .dashboard-overlay
       include ./partials/_new-post-form.jade
       include ./partials/_modify-post-form.jade
-      //.dashboard-form.new-project-form
-      //.dashboard-form.modify-project-form
+      include ./partials/_new-project-form.jade
+      include ./partials/_modify-project-form.jade
     h1(align="center") {{title}}
     button.logout.btn.btn-danger(ng-click="logout()") Sign out
     .dashboard-container

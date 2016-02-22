@@ -134,4 +134,19 @@ function DashboardCtrl($scope, $http, store, $window) {
       getProjects();
     });
   }
+
+  $scope.saveNewProject = function() {
+    if($scope.newProject.name && $scope.newProject.description && $scope.newProject.family) {
+      $('.new-project-form').children().children('.btn').hide();
+      $http.post('/api/projects', $scope.newProject).then(function() {
+        $scope.newProject = {};
+        $('.new-project-form').children().children('.btn').show();
+        $('.dashboard-form').hide();
+        $('.dashboard-overlay').fadeOut();
+        getProjects();
+      });
+    } else {
+      console.log("Missing data.");
+    }
+  }
 }
