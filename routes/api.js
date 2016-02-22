@@ -4,6 +4,10 @@ var mongoose = require('mongoose');
 var Project = require('../app/models/project');
 var User = require('../app/models/user');
 var Post = require('../app/models/post');
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+var fs = require('fs-extra');
+var path = require('path');
 
 // =============================================================================
 //                                 HOME PAGE
@@ -157,9 +161,41 @@ router.route('/projects/:id')
   .delete(function(req, res, next) {
     Project.remove({_id: req.params.id}, function(err) {
       if(err) {
-        res.send(500, err);
+        res.status(500).send(err);
       }
       res.send("Project removed.")
+    });
+  });
+
+// ADD IMAGE TO PROJECT, AUTH
+
+router.route('/projects/:id/add-image')
+  .post(multipartMiddleware, function(req, res, next) {
+    var file = req.files.file;
+    var uploadDate = new Date().toISOString();
+    uploadDate = uploadDate.replace(/-/g, "");
+    uploadDate = uploadDate.replace(/:/g, "");
+    uploadDate = uploadDate.replace(/\./g, "");
+    var tempPath = file.path;
+    var targetPath = path.join(__dirname, "../public/images/uploads/" + uploadDate + file.name);
+    var savePath = "/images/uploads/" + uploadDate + file.name;
+
+    fs.rename(tempPath, targetPath, function(err) {
+      if(err) {
+        return res.status(500).send(err);
+      }
+      Project.findById(req.params.id, function(err, project) {
+        if(err) {
+          return res.status(500).send(err);
+        }
+        project.photos.push(savePath);
+        project.save(function(err, project) {
+          if(err) {
+            return res.status(500).send(err);
+          }
+          return res.status(200).send(project);
+        });
+      });
     });
   });
 

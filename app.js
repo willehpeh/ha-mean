@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+var fs = require('fs-extra');
 
 var config = require('./config/config');
 

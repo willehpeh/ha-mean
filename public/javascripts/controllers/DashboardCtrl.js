@@ -4,6 +4,25 @@ function DashboardCtrl($scope, $http, store, $window, Upload) {
 
   $scope.title = "Dashboard";
 
+  $scope.upload = function(file, id) {
+    Upload.upload({
+      url: "/api/projects/" + id + "/add-image",
+      data: {file: file}
+    }).then(function() {
+        $('#' + id).children('.project-images').children('.progress').hide();
+        getProjects();
+      }, function(err) {
+        console.log(err)
+      }, function(evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        $('#' + id).children('.project-images').children('.progress').show();
+        $('#' + id).children('.project-images').children('.progress').children('.progress-bar').css({
+          "width" : progressPercentage
+        }).html(progressPercentage);
+      }
+    );
+  }
+
   var getProjects = function() {
     $http.get('/api/projects/').then(
       function(data) {

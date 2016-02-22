@@ -5,7 +5,6 @@ angular.module('ha-mean-angular').controller('PostCtrl', PostCtrl);
 angular.module('ha-mean-angular').controller('HomeCtrl', HomeCtrl);
 
 function HomeCtrl($scope, $http) {
-  $scope.backgroundPhoto = "/images/white.png";
   $http.get('/api/home').then(
     function(data) {
       $scope.data = data.data;

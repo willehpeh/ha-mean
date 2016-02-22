@@ -8,7 +8,7 @@
     label Famille
     br
     select(ng-model="newProject.family" required)
-      option(selected="selected" value="Logements") Logements
+      option(value="Logements") Logements
       option(value="Industriel") Industriel
       option(value="Bat-Public") Bâtiment public
     br
@@ -29,11 +29,11 @@
     br
     label Date de début de projet
     br
-    input(type="date" ng-model="newProject.date_started")
+    input(type="text" ng-model="newProject.date_started")
     br
     label Date de fin de projet
     br
-    input(type="date" ng-model="newProject.date_completed")
+    input(type="text" ng-model="newProject.date_completed")
     br
     br
     button.btn.btn-success(type="submit" ng-click="saveNewProject()" ng-disabled="newProjectForm.$invalid") Enregistrer
