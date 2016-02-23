@@ -192,13 +192,13 @@ function DashboardCtrl($scope, $http, store, $window, Upload) {
     var deleteButtons = $('#' + id).children('.project-images').children('.project-photo').children('.photo-delete-button');
     var mainDeleteButton = $('#' + id).children('.prepare-delete-photo');
     if(deleteButtons.is(':hidden')) {
-      deleteButtons.show();
+      deleteButtons.fadeIn();
       mainDeleteButton
         .removeClass('btn-danger')
         .addClass('btn-warning')
         .html('Terminé');
     } else {
-      deleteButtons.hide();
+      deleteButtons.fadeOut();
       mainDeleteButton
         .addClass('btn-danger')
         .removeClass('btn-warning')
