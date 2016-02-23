@@ -1,6 +1,27 @@
 .project-images
+  box-sizing: border-box
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  background-color: #EEE
+  padding: 10px
   img
     margin-right: 10px
+    max-width: 150px
 
 .upload-progress
   display: none
+
+.project-photo
+  position: relative
+  width: 160px
+
+.photo-delete-button
+  display: none
+  position: absolute
+  top: -10px
+  right: 0px
+  color: red
+  &:hover
+    color: lighten(red, 20%)
+    cursor: pointer

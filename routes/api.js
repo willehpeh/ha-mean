@@ -176,6 +176,7 @@ router.route('/projects/:id/add-image')
     uploadDate = uploadDate.replace(/-/g, "");
     uploadDate = uploadDate.replace(/:/g, "");
     uploadDate = uploadDate.replace(/\./g, "");
+    uploadDate = uploadDate.replace(/_/g, "");
     var tempPath = file.path;
     var targetPath = path.join(__dirname, "../public/images/uploads/" + uploadDate + file.name);
     var savePath = "/images/uploads/" + uploadDate + file.name;
@@ -196,6 +197,61 @@ router.route('/projects/:id/add-image')
           return res.status(200).send(project);
         });
       });
+    });
+  });
+
+router.route('/projects/:id/rem-image/:photo')
+  .post(function(req, res, next) {
+    if(!req.params.id || !req.params.photo) {
+      return res.status(400).send({message: "Bad request."});
+    }
+    var id = req.params.id;
+    var photo = "";
+    var toBeDeleted = true;
+
+    if(req.params.photo === "placeholder.jpg") {
+      photo = "/images/" + req.params.photo;
+      toBeDeleted = false;
+    } else {
+      photo = "/images/uploads/" + req.params.photo;
+    }
+
+    Project.findById(id, function(err, project) {
+      if(err) {
+        return res.status(500).send(err);
+      }
+
+      var photoPositionInArray = project.photos.indexOf(photo);
+
+      if(photoPositionInArray >= 0) {
+        console.log("Photo is in position " + photoPositionInArray);
+        project.photos.splice(photoPositionInArray, 1);
+        console.log("Photo removed from array.");
+        project.save(function(err, project) {
+          if(err) {
+            return res.status(500).send(err);
+          }
+          console.log("Project saved.");
+
+          if(toBeDeleted) {
+            var photoToDelete = path.join(__dirname, "../public" + photo);
+
+            fs.remove(photoToDelete, function (err) {
+              if(err) {
+                return res.status(500).send(err);
+              }
+              console.log("Photo deleted.");
+              return res.status(200).send({message: "Request complete."});
+            });
+          }
+          else {
+            return res.status(200).send({message: "Request complete."});
+          }
+        });
+      }
+      else {
+        return res.status(500).send({message: "Could not find photo in array."});
+      }
     });
   });
 

@@ -187,4 +187,33 @@ function DashboardCtrl($scope, $http, store, $window, Upload) {
       getProjects();
     });
   }
+
+  $scope.prepareDeletePhoto = function(id) {
+    var deleteButtons = $('#' + id).children('.project-images').children('.project-photo').children('.photo-delete-button');
+    var mainDeleteButton = $('#' + id).children('.prepare-delete-photo');
+    if(deleteButtons.is(':hidden')) {
+      deleteButtons.show();
+      mainDeleteButton
+        .removeClass('btn-danger')
+        .addClass('btn-warning')
+        .html('Terminé');
+    } else {
+      deleteButtons.hide();
+      mainDeleteButton
+        .addClass('btn-danger')
+        .removeClass('btn-warning')
+        .html('Supprimer une image');
+    }
+  }
+
+  $scope.deletePhoto = function(photo, id) {
+    if(photo === "/images/placeholder.jpg") {
+      photo = photo.substring(8);
+    } else {
+      photo = photo.substring(16);
+    }
+    $http.post("/api/projects/" + id + "/rem-image/" + photo).then(function() {
+      getProjects();
+    });
+  }
 }
