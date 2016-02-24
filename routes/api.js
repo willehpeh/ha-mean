@@ -32,10 +32,7 @@ router.route('/home')
 // GET ALL PROJECTS, UN-AUTH
 router.route('/projects')
   .get(function(req, res, next) {
-    Project.find({
-      $query: {},
-      $orderby: {created_at: -1}
-    }, function(err, data) {
+    Project.find(function(err, data) {
       if(err) {
         res.send(500, err);
       }
@@ -262,10 +259,7 @@ router.route('/projects/:id/rem-image/:photo')
 router.route('/news')
   // GET ALL POSTS, UN-AUTH
   .get(function(req, res, next) {
-    Post.find({
-      $query: {},
-      $orderby: {created_at: -1}
-    }, function(err, data) {
+    Post.find(function(err, data) {
       if(err) {
         res.send(500, err);
       }

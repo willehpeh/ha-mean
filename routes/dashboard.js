@@ -12,7 +12,7 @@ router.use(function(req, res, next) {
     // verifies secret and checks exp
     jwt.verify(token, config.secret, function(err, decoded) {
       if (err) {
-        return res.status(403).send({ success: false, message: 'Failed to authenticate token.' });
+        return res.render('login', {errorMessage: 'Token expiré. Merci de vous identifier.' });
       } else {
         req.body.token = token;
         next();
@@ -23,7 +23,7 @@ router.use(function(req, res, next) {
 
     // if there is no token
     // return an error
-    return res.render('login', {errorMessage: "Not logged in."});
+    return res.render('login', {errorMessage: "Merci de vous identifier."});
   }
 });
 
