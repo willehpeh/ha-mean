@@ -9,13 +9,44 @@ function HomeCtrl($scope, $http, $timeout, $interval) {
     function(data) {
       $scope.data = data.data;
       $scope.photoArray = [];
+      var container = $('.background-container');
+      var index = 0;
       for(i=0;i<$scope.data.length;i++) {
         for(j=0;j<$scope.data[i].photos.length;j++) {
           $scope.photoArray.push($scope.data[i].photos[j]);
         }
       }
-      $scope.index = 0;
-      $scope.backgroundPhoto = $scope.photoArray[$scope.index];
+
+      container.css({
+        'background-image' : 'url(' + $scope.photoArray[index] + ')'
+      });
+
+      var resetSlider = function() {
+        index = 0;
+        container.css({
+          'background-image' : 'url(' + $scope.photoArray[index] + ')'
+        });
+      }
+
+      var fadeBackOut = function(callback) {
+        container.animate({opacity:0}, 1000, function() {
+          container.css({
+            'background-image' : 'url(' + $scope.photoArray[++index] + ')'
+          });
+          if(index == $scope.photoArray.length) {
+            resetSlider();
+          }
+          callback();
+        });
+      }
+
+      var fadeBackIn = function() {
+        container.animate({opacity:1}, 1000);
+      }
+
+      $interval(function() {
+        fadeBackOut(fadeBackIn);
+      }, 8000);
     }, function(data) {
       console.log(data.data);
     }
@@ -36,15 +67,45 @@ function ProjectsCtrl($scope, $http, $window) {
   }
 }
 
-function ProjectDetailCtrl($scope, $http, $window, $location) {
+function ProjectDetailCtrl($scope, $http, $window, $location, $interval) {
   var id = $window.location.search;
   id = id.substring(4,id.length);
-  $scope.backgroundPhoto = "/images/white.png";
+  var index = 0
+  var container = $('.background-container');
   $http.get('/api/projects/' + id).then(
     function(data) {
       $scope.project = data.data;
-      console.log($scope.project);
-      $scope.backgroundPhoto = $scope.project.photos[0];
+      $scope.photoArray = $scope.project.photos;
+      container.css({
+        'background-image' : 'url(' + $scope.photoArray[index] + ')'
+      });
+
+      var resetSlider = function() {
+        index = 0;
+        container.css({
+          'background-image' : 'url(' + $scope.photoArray[index] + ')'
+        });
+      }
+
+      var fadeBackOut = function(callback) {
+        container.animate({opacity:0}, 1000, function() {
+          container.css({
+            'background-image' : 'url(' + $scope.photoArray[++index] + ')'
+          });
+          if(index == $scope.photoArray.length) {
+            resetSlider();
+          }
+          callback();
+        });
+      }
+
+      var fadeBackIn = function() {
+        container.animate({opacity:1}, 1000);
+      }
+
+      $interval(function() {
+        fadeBackOut(fadeBackIn);
+      }, 8000);
     }, function(data) {
       console.log(data.data);
     }

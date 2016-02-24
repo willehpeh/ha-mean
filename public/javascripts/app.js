@@ -1,1 +1,1 @@
-angular.module('ha-mean-angular', ['ngRoute', 'angular-storage', 'ngFileUpload'])
+angular.module('ha-mean-angular', ['ngRoute', 'angular-storage', 'ngFileUpload', 'ngAnimate'])

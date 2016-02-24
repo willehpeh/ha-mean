@@ -1,9 +1,8 @@
 extends layout
 
 block content
-  .loading-screen
-    .loading-animation.fa.fa-circle-o-notch.fa-spin.fa-2x
-  .full-page-container(ng-controller="ProjectDetailCtrl" ng-style="{'background-image' : 'url(' + backgroundPhoto + ')'}")
+  .full-page-container.black-page-container(ng-controller="ProjectDetailCtrl" ng-style="{'background-image' : 'url(' + backgroundPhoto + ')'}")
+    .background-container
     h1.page-title.white-text.shadow {{project.name}}
     .info-button.fa.fa-info.fa-2x.shadow
     .project-overlay
