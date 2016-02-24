@@ -5,7 +5,7 @@ var Project = require('../app/models/project');
 var User = require('../app/models/user');
 var Post = require('../app/models/post');
 var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart();
+var multipartMiddleware = multipart({uploadDir: "/images/tmp"});
 var fs = require('fs-extra');
 var path = require('path');
 
