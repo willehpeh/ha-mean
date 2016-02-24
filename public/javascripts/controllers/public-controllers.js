@@ -4,11 +4,18 @@ angular.module('ha-mean-angular').controller('NewsCtrl', NewsCtrl);
 angular.module('ha-mean-angular').controller('PostCtrl', PostCtrl);
 angular.module('ha-mean-angular').controller('HomeCtrl', HomeCtrl);
 
-function HomeCtrl($scope, $http) {
+function HomeCtrl($scope, $http, $timeout, $interval) {
   $http.get('/api/home').then(
     function(data) {
       $scope.data = data.data;
-      $scope.backgroundPhoto = $scope.data[0].photos[0];
+      $scope.photoArray = [];
+      for(i=0;i<$scope.data.length;i++) {
+        for(j=0;j<$scope.data[i].photos.length;j++) {
+          $scope.photoArray.push($scope.data[i].photos[j]);
+        }
+      }
+      $scope.index = 0;
+      $scope.backgroundPhoto = $scope.photoArray[$scope.index];
     }, function(data) {
       console.log(data.data);
     }
