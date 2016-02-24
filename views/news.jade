@@ -4,7 +4,7 @@ block content
   .container-fluid(ng-controller="NewsCtrl")
     h1.page-title Nos actualités
     .news-grid
-      .news-item(ng-repeat="post in news")
+      .news-item(ng-repeat="post in news" ng-class-odd="'odd'" ng-class-even="'even'")
         h3 {{post.title}}
         p {{post.text}}
         a(href="/news-detail?id={{post._id}}") Consulter

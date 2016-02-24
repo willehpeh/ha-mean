@@ -33,11 +33,11 @@
     br
     label Date de début de projet
     br
-    input(type="date" ng-model="modifyProject.date_started")
+    input(type="text" ng-model="modifyProject.date_started")
     br
     label Date de fin de projet
     br
-    input(type="date" ng-model="modifyProject.date_completed")
+    input(type="text" ng-model="modifyProject.date_completed")
     br
     br
     button.btn.btn-success(type="submit" ng-click="updateProject(modifyProject._id)" ng-disabled="modifyProjectForm.$invalid") Enregistrer
