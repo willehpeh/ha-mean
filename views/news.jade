@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .container-fluid(ng-controller="NewsCtrl")
+  .page-container(ng-controller="NewsCtrl")
     h1.page-title Nos actualités
     .news-grid
       .news-item(ng-repeat="post in news" ng-class-odd="'odd'" ng-class-even="'even'")

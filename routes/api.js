@@ -52,6 +52,8 @@ router.route('/projects')
     project.year = req.body.year;
     project.description = req.body.description;
     project.characteristics = req.body.characteristics;
+    project.front_page = req.body.front_page;
+    project.photos[0] = "/images/placeholder.jpg";
     project.save(function(err, project) {
       if(err) {
         return res.send(500, err);
@@ -85,6 +87,7 @@ router.route('/projects/:id')
       project.year = req.body.year;
       project.description = req.body.description;
       project.characteristics = req.body.characteristics;
+      project.front_page = req.body.front_page;
       project.save(function(err, project) {
         if(err) {
           return res.send(500, err);
