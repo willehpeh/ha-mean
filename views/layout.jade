@@ -6,8 +6,15 @@ html(ng-app="ha-mean-angular")
     link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
     link(rel="stylesheet" href="/stylesheets/main.min.css")
   body
-    .logo-container
-    .menu-button.fa.fa-bars.fa-2x
+    .menu-bar
+      nav
+        ul
+          li: a(href="/") ACCUEIL
+          li: a(href="/news") ACTUALITÉS
+          li: a(href="/projects") PROJETS
+          li: a(href="/agency") INFORMATIONS
+          li.last: a(href="/contact") CONTACT
+    //.menu-button.fa.fa-bars.fa-2x
     include ./partials/_overlay.jade
     block content
 

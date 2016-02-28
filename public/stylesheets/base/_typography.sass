@@ -18,11 +18,18 @@ h1, h2, h3, h4, h5, h6
   @include normal-sans
   color: $text
 
-p, label, input, textarea
+p, label, input, textarea, li
   @include normal-serif
   color: $text
 
+a
+  @include normal-sans
+  color: white
+  &:hover
+    color: white
+
 .page-title
+  color: white
   text-align: center
   position: relative
   top: 50px

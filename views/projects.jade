@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .container-fluid(ng-controller="ProjectsCtrl")
+  .project-page(ng-controller="ProjectsCtrl")
     h1.page-title Nos projets
     .project-grid
       .project-grid-item(ng-repeat="project in projects" ng-style="{'background-image': 'url(' + project.photos[0] + ')'}")
