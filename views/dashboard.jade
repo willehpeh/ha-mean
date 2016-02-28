@@ -31,11 +31,13 @@ html(ng-app="ha-mean-angular")
           .delete-confirm(ng-click="deleteProject(project._id)")
             .delete-confirm-cross.fa.fa-close
           h3 {{project.name}}
-          p Famille: {{project.family}}
+          p Adresse: {{project.address}}
+          p Surface: {{project.surface}}m2
+          p Client: {{project.client}}
+          p Statut: {{project.status}}
+          p Année de création: {{project.year}}
           p Description: {{project.description}}
-          p Réf: {{project.reference}}
-          p Partenaire: {{project.partner}}
-          p Projet démarré le {{project.date_started}}
+          p Caractéristiques: {{project.characteristics}}
           button.btn.btn-success.btn-sm( 
             ngf-select="upload($file, project._id)" 
             ngf-pattern="'image/*'" 

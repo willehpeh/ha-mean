@@ -5,35 +5,36 @@
     br
     input(type="text" ng-model="newProject.name" required)
     br
-    label Famille
+    label Adresse
     br
-    select(ng-model="newProject.family" required)
-      option(value="Logements") Logements
-      option(value="Industriel") Industriel
-      option(value="Bat-Public") Bâtiment public
+    input(type="text" ng-model="newProject.address")
+    br
+    label Surface
+    br
+    input(type="text" ng-model="newProject.surface")
     br
     label Description
     br
-    textarea(cols="50" rows="10" ng-model="newProject.description" placeholder="Votre texte ici" required)
+    textarea(cols="50" rows="10" ng-model="newProject.description" placeholder="Votre texte ici")
     br
-    label Partenaire
+    label Caractéristiques
     br
-    input(type="text" ng-model="newProject.partner")
+    input(type="text" ng-model="newProject.characteristics")
     br
-    label Référence
+    label Client
     br
-    input(type="text" ng-model="newProject.reference")
+    input(type="text" ng-model="newProject.client")
+    br
+    label Statut
+    br
+    input(type="text" ng-model="newProject.status")
     br
     label Les photos apparaissent sur la page d'accueil
     input(type="checkbox" ng-model="newProject.front_page")
     br
-    label Date de début de projet
+    label Année de création
     br
-    input(type="text" ng-model="newProject.date_started")
-    br
-    label Date de fin de projet
-    br
-    input(type="text" ng-model="newProject.date_completed")
+    input(type="text" ng-model="newProject.year")
     br
     br
     button.btn.btn-success(type="submit" ng-click="saveNewProject()" ng-disabled="newProjectForm.$invalid") Enregistrer

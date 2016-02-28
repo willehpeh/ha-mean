@@ -9,35 +9,36 @@
     br
     input(type="text" ng-model="modifyProject.name" required)
     br
-    label Famille
+    label Adresse
     br
-    select(ng-model="modifyProject.family" required)
-      option(value="Logements") Logements
-      option(value="Industriel") Industriel
-      option(value="Bat-Public") Bâtiment public
+    input(type="text" ng-model="modifyProject.address")
+    br
+    label Surface
+    br
+    input(type="text" ng-model="modifyProject.surface")
     br
     label Description
     br
-    textarea(cols="50" rows="10" ng-model="modifyProject.description" placeholder="Votre texte ici" required)
+    textarea(cols="50" rows="10" ng-model="modifyProject.description" placeholder="Votre texte ici")
     br
-    label Partenaire
+    label Caractéristiques
     br
-    input(type="text" ng-model="modifyProject.partner")
+    input(type="text" ng-model="modifyProject.characteristics")
     br
-    label Référence
+    label Client
     br
-    input(type="text" ng-model="modifyProject.reference")
+    input(type="text" ng-model="modifyProject.client")
+    br
+    label Statut
+    br
+    input(type="text" ng-model="modifyProject.status")
     br
     label Les photos apparaissent sur la page d'accueil
     input(type="checkbox" ng-model="modifyProject.front_page")
     br
-    label Date de début de projet
+    label Année de création
     br
-    input(type="text" ng-model="modifyProject.date_started")
-    br
-    label Date de fin de projet
-    br
-    input(type="text" ng-model="modifyProject.date_completed")
+    input(type="text" ng-model="modifyProject.year")
     br
     br
     button.btn.btn-success(type="submit" ng-click="updateProject(modifyProject._id)" ng-disabled="modifyProjectForm.$invalid") Enregistrer

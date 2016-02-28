@@ -43,47 +43,15 @@ router.route('/projects')
   // CREATE NEW PROJECT, AUTH
   .post(function(req, res, next) {
     var project = new Project();
-    var projectPhotos = [];
-    if(
-      !req.body.name ||
-      !req.body.family ||
-      !req.body.description
-    ) {
-       return res.render('error', {
-        message : "Mandatory fields not completed.",
-        error : {}
-      });
-    }
+
     project.name = req.body.name;
-    project.family = req.body.family;
+    project.address = req.body.address;
+    project.surface = req.body.surface;
+    project.client = req.body.client;
+    project.status = req.body.status;
+    project.year = req.body.year;
     project.description = req.body.description;
-    if(req.body.partner) {
-    project.partner = req.body.partner;
-    }
-    if(req.body.reference) {
-      project.reference = req.body.reference;
-    }
-    if(req.body.news) {
-      project.news = req.body.news;
-    }
-    if(req.body.front_page) {
-    project.front_page = req.body.front_page;
-    }
-    if(req.body.front_page_order) {
-    project.front_page_order = req.body.front_page_order;
-    }
-    if(req.body.date_started) {
-    project.date_started = req.body.date_started;
-    }
-    if(req.body.date_completed) {
-      project.date_completed = req.body.date_completed;
-    }
-    if(req.body.photo) {
-      project.photos.push(req.body.photo);
-    }
-    if(!req.body.photo) {
-      project.photos.push("/images/placeholder.jpg");
-    }
+    project.characteristics = req.body.characteristics;
     project.save(function(err, project) {
       if(err) {
         return res.send(500, err);
@@ -109,42 +77,14 @@ router.route('/projects/:id')
       if(err) {
         res.send(500, err);
       }
-      var projectPhotos = [];
-      if(
-        !req.body.name ||
-        !req.body.family ||
-        !req.body.description
-      ) {
-         return res.render('error', {
-          message : "Mandatory fields not completed.",
-          error : {}
-        });
-      }
       project.name = req.body.name;
-      project.family = req.body.family;
+      project.address = req.body.address;
+      project.surface = req.body.surface;
+      project.client = req.body.client;
+      project.status = req.body.status;
+      project.year = req.body.year;
       project.description = req.body.description;
-      if(req.body.partner) {
-        project.partner = req.body.partner;
-      }
-      if(req.body.reference) {
-        project.reference = req.body.reference;
-      }
-      if(req.body.news) {
-      project.news = req.body.news;
-      }
-      project.front_page = req.body.front_page;
-      if(req.body.front_page_order) {
-      project.front_page_order = req.body.front_page_order;
-      }
-      if(req.body.date_started) {
-      project.date_started = req.body.date_started;
-      }
-      if(req.body.date_completed) {
-        project.date_completed = req.body.date_completed;
-      }
-      if(req.body.photo) {
-        project.photos.push(req.body.photo);
-      }
+      project.characteristics = req.body.characteristics;
       project.save(function(err, project) {
         if(err) {
           return res.send(500, err);
