@@ -115,8 +115,14 @@ function ProjectDetailCtrl($scope, $http, $window, $location, $interval) {
 function NewsCtrl($scope, $http) {
   $http.get('/api/news').then(
     function(data) {
+      var posts = data.data;
+      for(i=0;i<posts.length;i++) {
+        posts[i].year = posts[i].created_at.substr(0, 4);
+        posts[i].month = posts[i].created_at.substr(5, 2);
+        posts[i].day = posts[i].created_at.substr(8, 2);
+        posts[i].time = posts[i].created_at.substr(11, 5);
+      }
       $scope.news = data.data;
-      console.log($scope.news);
     }, function(data) {
       console.log(data.data);
     }

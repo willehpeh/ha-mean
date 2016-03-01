@@ -1,10 +1,13 @@
 extends layout
 
 block content
-  .page-container(ng-controller="NewsCtrl")
+  .page-container.news-page-container
+  .filter(ng-controller="NewsCtrl")
     h1.page-title Nos actualités
     .news-grid
-      .news-item(ng-repeat="post in news" ng-class-odd="'odd'" ng-class-even="'even'")
+      .news-item(ng-repeat="post in news | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'")
         h3 {{post.title}}
+        br
+        .date
+          p.date-text Mis à jour le {{post.day}}-{{post.month}}-{{post.year}} à {{post.time}}
         p {{post.text}}
-        a(href="/news-detail?id={{post._id}}") Consulter

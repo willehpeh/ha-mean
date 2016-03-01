@@ -16,12 +16,30 @@
   box-sizing: border-box
   padding-top: 20px
   padding-bottom: 150px
+  z-index: -1
   background:
     image: url("/images/dark-placeholder.jpg")
     size: cover
     position: center
     repeat: no-repeat
     attachment: fixed
+
+.news-page-container
+  background-image: url("/images/background1.jpg")
+
+.filter
+  position: absolute
+  top: 0px
+  left: 0px
+  min-height: 100vh
+  height: 100%
+  width: 100%
+  box-sizing: border-box
+  z-index: 1
+  background-color: rgba(black, 0.5)
+  padding-top: 20px
+  padding-bottom: 200px
+  overflow: auto
 
 .background-container
   box-sizing: border-box
@@ -58,3 +76,4 @@
   margin-top: 90px
   left: 50%
   transform: translateX(-50%)
+  z-index: 2
