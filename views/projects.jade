@@ -4,7 +4,7 @@ block content
   .page-container(ng-controller="ProjectsCtrl")
     h1.page-title Nos projets
     .project-grid
-      .project-grid-item(ng-repeat="project in projects" ng-style="{'background-image': 'url(' + project.photos[0] + ')'}")
+      .project-grid-item(ng-repeat="project in projects | orderBy:'created_at':true" ng-style="{'background-image': 'url(' + project.photos[0] + ')'}")
         .info-box
           p.project-grid-title {{project.name}}
           p.small-address {{project.address}}

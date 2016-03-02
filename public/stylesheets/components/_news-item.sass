@@ -1,4 +1,5 @@
 .news-item
+  box-sizing: border-box
   white-space: pre-wrap
   padding: 20px
   padding-top: 10px
@@ -9,3 +10,16 @@
 
 .news-item.even
   background-color: white
+
+.date
+  box-sizing: border-box
+  position: absolute
+  top: 20px
+  right: 20px
+  @include phone
+    position: relative
+    left: 0px
+    top: 0px
+
+.date-text
+  color: #777

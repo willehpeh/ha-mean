@@ -6,8 +6,7 @@ block content
     h1.page-title Nos actualités
     .news-grid
       .news-item(ng-repeat="post in news | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'")
-        h3 {{post.title}}
-        br
+        h3.news-title {{post.title}}
         .date
           p.date-text Mis à jour le {{post.day}}-{{post.month}}-{{post.year}} à {{post.time}}
         p {{post.text}}

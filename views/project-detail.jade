@@ -6,11 +6,25 @@ block content
     h1.page-title.white-text.shadow {{project.name}}
     .info-button.fa.fa-info.fa-4x
     .project-overlay
-      p Adresse : {{project.address}}
-      p Surface : {{project.surface}}
-      p Client : {{project.client}}
-      p Statut : {{project.status}}
-      p Année : {{project.year}}
-      p Description : {{project.description}}
-      p Caractéristiques : {{project.characteristics}}
+      p
+        b Adresse : 
+        span {{project.address}}
+      p
+        b Surface : 
+        span {{project.surface}}
+      p
+        b Client : 
+        span {{project.client}}
+      p
+        b Statut : 
+        span {{project.status}}
+      p
+        b Année : 
+        span {{project.year}}
+      p
+        b Description : 
+        span {{project.description}}
+      p
+        b Caractéristiques : 
+        span {{project.characteristics}}
       .fa.fa-close.project-overlay-close

@@ -17,7 +17,7 @@ html(ng-app="ha-mean-angular")
       .dashboard-news
         h2(align="center") Actualités
         .new-post.dashboard-add-button.fa.fa-plus-circle.fa-3x
-        .dashboard-post(ng-repeat="post in posts" id="{{post._id}}")
+        .dashboard-post(ng-repeat="post in posts | orderBy:'created_at':true" id="{{post._id}}")
           .delete-confirm(ng-click="deletePost(post._id)")
             .delete-confirm-cross.fa.fa-close
           h3 {{post.title}}
@@ -27,17 +27,32 @@ html(ng-app="ha-mean-angular")
       .dashboard-projects
         h2(align="center") Projets
         .new-project.dashboard-add-button.fa.fa-plus-circle.fa-3x
-        .dashboard-project(ng-repeat="project in projects" id="{{project._id}}")
+        .dashboard-project(ng-repeat="project in projects | orderBy:'created_at':true" id="{{project._id}}")
           .delete-confirm(ng-click="deleteProject(project._id)")
             .delete-confirm-cross.fa.fa-close
           h3 {{project.name}}
-          p Adresse: {{project.address}}
-          p Surface: {{project.surface}}m2
-          p Client: {{project.client}}
-          p Statut: {{project.status}}
-          p Année de création: {{project.year}}
-          p Description: {{project.description}}
-          p Caractéristiques: {{project.characteristics}}
+          p
+            b Adresse: 
+            span {{project.address}}
+          p
+            b Surface: 
+            span {{project.surface}}
+          p
+            b Client: 
+            span {{project.client}}
+          p
+            b Statut: 
+            span {{project.status}}
+          p
+            b Année de création: 
+            span {{project.year}}
+          p
+            b Description: 
+            span {{project.description}}
+          br
+          p
+            b Caractéristiques: 
+            span {{project.characteristics}}
           button.btn.btn-success.btn-sm( 
             ngf-select="upload($file, project._id)" 
             ngf-pattern="'image/*'" 

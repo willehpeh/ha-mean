@@ -112,6 +112,7 @@ router.route('/projects/:id')
 router.route('/projects/:id/add-image')
   .post(multipartMiddleware, function(req, res, next) {
     var file = req.files.file;
+    file.name = file.name.replace(/\s/g, "");
     var uploadDate = new Date().toISOString();
     uploadDate = uploadDate.replace(/-/g, "");
     uploadDate = uploadDate.replace(/:/g, "");
