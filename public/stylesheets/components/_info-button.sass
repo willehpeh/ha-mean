@@ -1,11 +1,18 @@
 .info-button
   box-sizing: border-box
   position: absolute
-  top: 55px
-  right: 130px
-  color: white
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  color: rgba(white, 0.3)
+  border: 2px solid transparent
+  background-color: rgba(black, 0.2)
+  padding: 30px 50px 30px 50px
+  border-radius: 50%
+  transition: all 0.3s
   &:hover
-    color: $highlight
+    color: white
+    background-color: rgba(black, 0.5)
     cursor: pointer
   @include phone
     top: 85px
