@@ -2,18 +2,29 @@ doctype html
 html(ng-app="ha-mean-angular")
   head
     title H&A Architecture - #{title}
+    meta(charset="utf-8")
+    meta(name="viewport",content="width=device-width")
     link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
     link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
     link(rel="stylesheet" href="/stylesheets/main.min.css")
   body
     .menu-bar
       nav
-        ul
+        ul.desktop-menu
           li: a(href="/") ACCUEIL
           li: a(href="/news") ACTUALITÉS
           li: a(href="/projects") PROJETS
           li: a(href="/agency") INFORMATIONS
           li.last: a(href="/contact") CONTACT
+      ul.phone-menu
+        li: a(href="/") ACCUEIL
+        li: a(href="/news") ACTUALITÉS
+        li: a(href="/projects") PROJETS
+        li: a(href="/agency") INFORMATIONS
+        li: a(href="/contact") CONTACT
+        li: a#open-phone-menu(href="" onclick="togglePhoneMenu()") MENU 
+          span#menu-arrow.fa.fa-chevron-circle-down
+          
     //.menu-button.fa.fa-bars.fa-2x
     include ./partials/_overlay.jade
     block content

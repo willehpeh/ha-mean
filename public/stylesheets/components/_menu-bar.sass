@@ -11,13 +11,26 @@
   &:hover
     background-color: rgba(black, 0.8)
     height: 4em
+  @include phone
+    height: 4.5em
+    transition: all 0.5s ease-in-out
+    &:hover
+      background-color: rgba(black, 0.8)
+      height: 4.5em
 
 nav
+  box-sizing: border-box
   position: absolute
   right: 40px
   top: 50%
-  ul
-    display: flex
+  @include phone
+    width: 100%
+    left: 0px
+.desktop-menu
+  display: flex
+  padding: 0px
+  @include phone
+    display: none
   li
     height: 100%
     color: white
@@ -28,5 +41,19 @@ nav
     margin-right: 30px
     &:hover
       cursor: pointer
-  .last
-    margin-right: 0px
+.last
+  margin-right: 0px
+
+.phone-menu
+  position: absolute
+  bottom: 0px
+  left: 50%
+  transform: translateX(-50%)
+  display: none
+  list-style: none
+  padding: 0px
+  text-align: center
+  @include phone
+    display: block
+  li
+    line-height: 3em
