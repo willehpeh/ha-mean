@@ -45,6 +45,7 @@ router.route('/projects')
     var project = new Project();
 
     project.name = req.body.name;
+    project.family = req.body.family;
     project.address = req.body.address;
     project.surface = req.body.surface;
     project.client = req.body.client;
@@ -80,6 +81,7 @@ router.route('/projects/:id')
         res.send(500, err);
       }
       project.name = req.body.name;
+      project.family = req.body.family;
       project.address = req.body.address;
       project.surface = req.body.surface;
       project.client = req.body.client;

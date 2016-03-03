@@ -31,28 +31,7 @@ html(ng-app="ha-mean-angular")
           .delete-confirm(ng-click="deleteProject(project._id)")
             .delete-confirm-cross.fa.fa-close
           h3 {{project.name}}
-          p
-            b Adresse: 
-            span {{project.address}}
-          p
-            b Surface: 
-            span {{project.surface}}
-          p
-            b Client: 
-            span {{project.client}}
-          p
-            b Statut: 
-            span {{project.status}}
-          p
-            b Année de création: 
-            span {{project.year}}
-          p
-            b Description: 
-            span {{project.description}}
           br
-          p
-            b Caractéristiques: 
-            span {{project.characteristics}}
           button.btn.btn-success.btn-sm( 
             ngf-select="upload($file, project._id)" 
             ngf-pattern="'image/*'" 
@@ -68,8 +47,12 @@ html(ng-app="ha-mean-angular")
             .progress.upload-progress
               .progress-bar
           br
+          br
           button.btn.btn-success.modify-project(ng-click="openModifyProject(project._id)") Modifier projet
           button.btn.btn-danger.delete-project(ng-click="confirmDeleteProject(project._id)") Supprimer projet
+          br
+          br
+          br
 
 
   script(src="/libs/jquery/dist/jquery.min.js")

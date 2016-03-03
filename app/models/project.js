@@ -11,7 +11,8 @@ var projectSchema = new mongoose.Schema({
     description : {type : String, default: ''},
     characteristics : {type: String, default: ''},
     photos : [],
-    front_page : {type : Boolean, default: false}
+    front_page : {type : Boolean, default: false},
+    family : {type : String, default: ''}
 });
 
 module.exports = mongoose.model("Project", projectSchema);

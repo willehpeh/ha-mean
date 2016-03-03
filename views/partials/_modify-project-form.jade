@@ -9,6 +9,13 @@
     br
     input(type="text" ng-model="modifyProject.name" required)
     br
+    label Famille
+    br
+    select(ng-model="modifyProject.family")
+      option(value="logement") Logement
+      option(value="industriel") Industriel
+      option(value="public") Bâtiment public
+    br
     label Adresse
     br
     input(type="text" ng-model="modifyProject.address")
