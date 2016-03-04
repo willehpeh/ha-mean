@@ -8,6 +8,8 @@
   display: flex
   justify-content: center
   align-items: center
+  @include phone
+    display: block
 
   label
     position: relative
@@ -25,7 +27,7 @@
       background-color: white
       border-radius: 50%
       position: absolute
-      right: -1.2em
+      right: -1.5em
       top: 50%
       transform: translateY(-50%)
 
@@ -39,6 +41,6 @@
       background-color: $highlight
       border-radius: 50%
       position: absolute
-      right: -1.2em
+      right: -1.5em
       top: 50%
       transform: translateY(-50%)
