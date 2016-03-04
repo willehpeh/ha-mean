@@ -59,6 +59,33 @@ $('.new-project').click(function() {
   $('.dashboard-overlay').fadeIn();
 });
 
+$('#logement').change(function() {
+  if(this.checked) {
+    $('.logement').show();
+  }
+  else if(!this.checked) {
+    $('.logement').hide();
+  }
+});
+
+$('#industriel').change(function() {
+  if(this.checked) {
+    $('.industriel').show();
+  }
+  else if(!this.checked) {
+    $('.industriel').hide();
+  }
+});
+
+$('#public').change(function() {
+  if(this.checked) {
+    $('.public').show();
+  }
+  else if(!this.checked) {
+    $('.public').hide();
+  }
+});
+
 $(document).ready(function() {
 
 });

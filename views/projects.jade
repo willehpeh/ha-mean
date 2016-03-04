@@ -3,6 +3,16 @@ extends layout
 block content
   .page-container(ng-controller="ProjectsCtrl")
     h1.page-title Nos projets
+    .project-selector
+      label(for="logement") 
+        input#logement(type="checkbox" value="logement" checked)
+        span.white-text.label-text Logements
+      label(for="industriel")
+        input#industriel(type="checkbox" value="industriel" checked)
+        span.white-text.label-text Industriels
+      label(for="public")
+        input#public(type="checkbox" value="public" checked)
+        span.white-text.label-text Bâtiments publics
     .project-grid
       .project-grid-item(ng-repeat="project in projects | orderBy:'created_at':true" ng-class="project.family" ng-style="{'background-image': 'url(' + project.photos[0] + ')'}")
         .info-box
