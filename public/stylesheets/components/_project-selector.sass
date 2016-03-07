@@ -16,15 +16,17 @@
     cursor: pointer
     margin-left: 2em
     margin-right: 2em
+    @include normal-sans
 
   input[type="checkbox"]
     display: none
 
     + .label-text::after
       content: ""
-      width: 0.8em
-      height: 0.8em
-      background-color: white
+      width: 1em
+      height: 1em
+      background-color: darken($highlight, 40%)
+      border: 2px solid $highlight
       border-radius: 50%
       position: absolute
       right: -1.5em
@@ -36,9 +38,10 @@
 
     &:checked + .label-text::after
       content: ""
-      width: 0.8em
-      height: 0.8em
-      background-color: $highlight
+      width: 1em
+      height: 1em
+      background-color: lighten($highlight, 20%)
+      border: 2px solid $highlight
       border-radius: 50%
       position: absolute
       right: -1.5em
