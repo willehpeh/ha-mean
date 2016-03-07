@@ -83,7 +83,7 @@ router.route('/login')
         var token = jwt.sign(user, config.secret, {
           expiresIn: 3600 // expires in 60 minutes
         });
-        return res.status(200).send({success: true, token: token, message: "Authentication successful."});
+        return res.status(200).send({success: true, user: user._id, token: token, message: "Authentication successful."});
       }
     });
   });

@@ -5,9 +5,12 @@ var Project = require('../app/models/project');
 var User = require('../app/models/user');
 var Post = require('../app/models/post');
 var path = require('path');
+var crypto = require('crypto');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart({uploadDir: path.join(__dirname, "../public/images/tmp")});
 var fs = require('fs-extra');
+
+var config = require('../config/config');
 
 // =============================================================================
 //                                 HOME PAGE
@@ -279,6 +282,46 @@ router.route('/news/:id')
         res.send(err);
       }
       res.send("Post removed.")
+    });
+  });
+
+// =============================================================================
+//                                   USERS
+// =============================================================================
+
+router.route('/change-pw/:id')
+  .put(function(req, res, next) {
+    User.findById(req.params.id, function(err, user) {
+      if(err) {
+        res.send(500, err);
+      }
+      var oldPassword = req.body.oldPassword;
+      var newPassword = req.body.newPassword;
+
+      var oldPasswordHash = crypto
+        .createHmac('sha256', config.secret)
+        .update(oldPassword)
+        .digest('hex');
+
+      var newPasswordHash = crypto
+        .createHmac('sha256', config.secret)
+        .update(newPassword)
+        .digest('hex');
+
+      if(oldPasswordHash != user.password) {
+        return res.status(401).send({success: false, message: "Incorrect password."});
+      }
+
+      if(oldPasswordHash == user.password) {
+        user.password = newPasswordHash;
+        user.save(function(err, user) {
+          if(err) {
+            return res.status(500).send({success: false, message: "Database error."});
+          }
+          return res.status(200).send({success: true, message: "Password changed."});
+        });
+      }
+
     });
   });
 
