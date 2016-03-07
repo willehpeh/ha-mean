@@ -71,43 +71,66 @@ function ProjectDetailCtrl($scope, $http, $window, $location, $interval) {
   var id = $window.location.search;
   id = id.substring(4,id.length);
   var index = 0
-  var container = $('.background-container');
+  var container = $('.project-background-image');
+  var slideshowContainer = $('.slideshow-image-container');
+
+  $scope.nextImage = function() {
+    index++;
+    selectImage(index);
+  }
+
+  $scope.prevImage = function() {
+    if(index === 0) {
+      slideshowContainer.css({
+        'left' : -($scope.photoArray.length*100) + "%"
+      });
+      index = $scope.photoArray.length - 1;
+      selectImage(index);
+    }
+    else {
+      index--;
+      selectImage(index);
+    }
+  }
+
+  $scope.moveToImage = function(id) {
+    index = id;
+    selectImage(index);
+  }
+
+  var selectImage = function(id) {
+    slideshowContainer.animate({
+      'left' : -id*100 + '%'
+    }, 1000, function() {
+      if(index === $scope.photoArray.length) {
+        index = 0;
+        slideshowContainer.css({
+          'left' : '0%'
+        });
+        $('#button0').addClass('selected');
+        $('#button0').siblings().removeClass('selected');
+      }
+    });
+    $('#button' + id).addClass('selected');
+    $('#button' + id).siblings().removeClass('selected');
+  }
+
   $http.get('/api/projects/' + id).then(
     function(data) {
       $scope.project = data.data;
       $scope.photoArray = $scope.project.photos;
       container.css({
-        'background-image' : 'url(' + $scope.photoArray[index] + ')'
+        'background-image' : 'url(' + $scope.photoArray[0] + ')'
       });
-
-      var resetSlider = function() {
-        index = 0;
-        container.css({
-          'background-image' : 'url(' + $scope.photoArray[index] + ')'
-        });
-      }
-
-      var fadeBackOut = function(callback) {
-        container.animate({opacity:0}, 1000, function() {
-          container.css({
-            'background-image' : 'url(' + $scope.photoArray[++index] + ')'
-          });
-          if(index == $scope.photoArray.length) {
-            resetSlider();
-          }
-          callback();
-        });
-      }
-
-      var fadeBackIn = function() {
-        container.animate({opacity:1}, 1000);
-      }
-
+      $('.slideshow-image-container').css({
+        'width' : ($scope.photoArray.length + 1) * 100 + "%"
+      });
+      $('#looper').css({
+        'background-image' : 'url(' + $scope.photoArray[0] + ')'
+      });
       $interval(function() {
-        fadeBackOut(fadeBackIn);
+        $scope.nextImage();
       }, 8000);
-    }, function(data) {
-      console.log(data.data);
     }
   );
 }

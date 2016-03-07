@@ -1,30 +1,38 @@
 extends layout
 
 block content
-  .full-page-container.black-page-container(ng-controller="ProjectDetailCtrl" ng-style="{'background-image' : 'url(' + backgroundPhoto + ')'}")
-    .background-container
-    h1.page-title.white-text.shadow.project-title {{project.name}}
-    .info-button.fa.fa-info.fa-lg
-    .project-overlay
-      p
-        b Adresse : 
-        span {{project.address}}
-      p
-        b Surface : 
-        span {{project.surface}}
-      p
-        b Client : 
-        span {{project.client}}
-      p
-        b Statut : 
-        span {{project.status}}
-      p
-        b Année : 
-        span {{project.year}}
-      p
-        b Description : 
-        span {{project.description}}
-      p
-        b Caractéristiques : 
-        span {{project.characteristics}}
-      .fa.fa-close.project-overlay-close
+  .project-filter
+  .project-background-image
+  .project-detail-container(ng-controller="ProjectDetailCtrl")
+    .project-slideshow-container
+      .slideshow-image-container
+        .project-image(ng-repeat="photo in photoArray" id="image{{$index}}" ng-style="{'background-image' : 'url({{photoArray[$index]}})'}")
+        .project-image(id="looper")
+      .slideshow-select-buttons
+        .slideshow-select-button(ng-repeat="photo in photoArray" ng-class="{selected: $first}" id="button{{$index}}" ng-click="moveToImage($index)")
+      .slideshow-next-button(ng-click="nextImage()")
+        .fa.fa-angle-right.fa-3x
+      .slideshow-prev-button(ng-click="prevImage()")
+        .fa.fa-angle-left.fa-3x
+    .project-info-container
+      h1.project-name {{project.name}}
+      h4.project-name {{project.characteristics}}
+      .project-details
+        .project-details-left
+          p 
+            b Année : 
+            {{project.year}}
+          p 
+            b Statut : 
+            {{project.status}}
+          p 
+            b Client : 
+            {{project.client}}
+          p 
+            b Adresse : 
+            {{project.address}}
+          p 
+            b Surface : 
+            {{project.surface}}
+        .project-details-right
+          p {{project.description}}
