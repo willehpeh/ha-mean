@@ -309,7 +309,7 @@ router.route('/change-pw/:id')
         .digest('hex');
 
       if(oldPasswordHash != user.password) {
-        return res.status(401).send({success: false, message: "Incorrect password."});
+        return res.status(401).send({success: false, message: "Le mot de passe actuel est incorrect."});
       }
 
       if(oldPasswordHash == user.password) {
@@ -318,7 +318,7 @@ router.route('/change-pw/:id')
           if(err) {
             return res.status(500).send({success: false, message: "Database error."});
           }
-          return res.status(200).send({success: true, message: "Password changed."});
+          return res.status(200).send({success: true, message: "Mot de passe modifié."});
         });
       }
 

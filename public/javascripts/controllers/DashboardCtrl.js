@@ -1,6 +1,6 @@
 angular.module('ha-mean-angular', ['angular-storage', 'ngFileUpload']).controller('DashboardCtrl', DashboardCtrl);
 
-function DashboardCtrl($scope, $http, store, $window, Upload) {
+function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
 
   $scope.title = "Dashboard";
 
@@ -48,6 +48,37 @@ function DashboardCtrl($scope, $http, store, $window, Upload) {
     store.remove('token');
     $window.location.href = "/auth/login";
   }
+
+  $scope.openChangePassword = function() {
+    $('.change-password-form').show();
+    $('.dashboard-overlay').fadeIn();
+  }
+
+  $scope.changePasswordConfirm = function() {
+    var oldPassword = $scope.changePassword.oldPassword;
+    var newPassword = $scope.changePassword.newPassword;
+    var newPasswordCheck = $scope.changePassword.newPasswordCheck;
+    var userId = store.get('user');
+    if(newPassword != newPasswordCheck) {
+      $scope.passwordMessage = "Le nouveau mot de passe et sa vérification ne sont pas les mêmes."
+    }
+    else if(newPassword == newPasswordCheck) {
+      $('.change-password-form').children().children('.btn').hide();
+      $http.put('/api/change-pw/' + userId, $scope.changePassword).then(function(data) {
+        $scope.passwordMessage = data.data.message;
+        $timeout(function() {
+          $scope.changePassword = {};
+          $('.change-password-form').children().children('.btn').show();
+          $('.dashboard-form').hide();
+          $('.dashboard-overlay').fadeOut();
+        }, 2000);
+      }, function(data) {
+        $scope.passwordMessage = data.data.message;
+        $('.change-password-form').children().children('.btn').show();
+      });
+    }
+  }
+
   $scope.saveNewPost = function() {
     if($scope.newPost.title && $scope.newPost.text) {
       $('.new-post-form').children().children('.btn').hide();
