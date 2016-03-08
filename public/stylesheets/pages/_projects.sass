@@ -39,6 +39,8 @@
   background-color: rgba(black, 0.7)
   @include phone
     margin-top: 4.5em
+    width: 100%
+    margin-left: 0px
 
 .slideshow-image-container
   position: absolute
@@ -65,19 +67,28 @@
   padding-bottom: 4em
   margin-bottom: 4em
   background-color: rgba(white, 0.9)
+  @include phone
+    width: 100%
+    margin-left: 0px
 
 .project-details
   white-space: pre-wrap
   margin-top: 3em
   display: flex
+  @include phone
+    display: inline
 
 .project-details-left
   box-sizing: border-box
   width: 40%
+  @include phone
+    width: 100%
 
 .project-details-right
   box-sizing: border-box
   width: 60%
+  @include phone
+    width: 100%
 
 .project-name
   text-align: center
