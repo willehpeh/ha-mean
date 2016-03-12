@@ -173,6 +173,8 @@ router.route('/projects/:id/add-image')
     });
   });
 
+  // Delete image from project, AUTH
+
 router.route('/projects/:id/rem-image/:photo')
   .delete(tokenMiddleware, function(req, res, next) {
     if(!req.params.id || !req.params.photo) {

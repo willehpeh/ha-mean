@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+// Create schema for Projects
+
 var projectSchema = new mongoose.Schema({
     created_at : {type : Date, default: Date.now},
     name : {type : String, default: ''},

@@ -4,6 +4,8 @@ angular.module('ha-mean-angular').controller('NewsCtrl', NewsCtrl);
 angular.module('ha-mean-angular').controller('PostCtrl', PostCtrl);
 angular.module('ha-mean-angular').controller('HomeCtrl', HomeCtrl);
 
+
+// Home page controller
 function HomeCtrl($scope, $http, $timeout, $interval) {
   $http.get('/api/home').then(
     function(data) {

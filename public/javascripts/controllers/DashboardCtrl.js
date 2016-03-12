@@ -1,9 +1,12 @@
 angular.module('ha-mean-angular', ['angular-storage', 'ngFileUpload']).controller('DashboardCtrl', DashboardCtrl);
 
+// Controller for Dashboard page
+
 function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
 
   $scope.title = "Dashboard";
 
+  // Allows uploading of images
   $scope.upload = function(file, id) {
     Upload.upload({
       url: "/api/projects/" + id + "/add-image",
@@ -23,6 +26,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     );
   }
 
+  // Refresh projects
   var getProjects = function() {
     $http.get('/api/projects/').then(
       function(data) {
@@ -33,6 +37,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     );
   }
 
+  // Refresh news
   var getNews = function() {
     $http.get('/api/news').then(function(data) {
       $scope.posts = data.data;
@@ -44,16 +49,21 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
   getProjects();
   getNews();
 
+
+  // Logout of Dashboard
   $scope.logout = function() {
     store.remove('token');
     $window.location.href = "/auth/login";
   }
 
+
+  // Opens overlay to change password
   $scope.openChangePassword = function() {
     $('.change-password-form').show();
     $('.dashboard-overlay').fadeIn();
   }
 
+  // Does actual password changing
   $scope.changePasswordConfirm = function() {
     var oldPassword = $scope.changePassword.oldPassword;
     var newPassword = $scope.changePassword.newPassword;
@@ -78,6 +88,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     }
   }
 
+  // Saves new post entered in New Post overlay
   $scope.saveNewPost = function() {
     if($scope.newPost.title && $scope.newPost.text) {
       $('.new-post-form').children().children('.btn').hide();
@@ -95,6 +106,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     }
   }
 
+  // Opens Modify Post overlay
   $scope.openModifyPost = function(id) {
     $('.modify-post-form').show();
     $('.dashboard-overlay').fadeIn();
@@ -103,6 +115,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     });
   }
 
+  // Saves post entered in Modify Post overlay
   $scope.updatePost = function(id) {
     $('.modify-post-form').children().children('.btn').hide();
     $http.put('/api/news/' + id, $scope.modifyPost, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
@@ -116,6 +129,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     });
   }
 
+  // Displays Delete Post button
   $scope.confirmDeletePost = function(id) {
     var postToDelete = $('#' + id);
     var deleteButton = postToDelete.children('.delete-post');
@@ -140,6 +154,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     }
   }
 
+  // Deletes Post
   $scope.deletePost = function(id) {
     var postToDelete = $('#' + id);
     var deleteConfirmButton = postToDelete.children('.delete-confirm').children('.delete-confirm-cross');
@@ -154,6 +169,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     });
   }
 
+  // Opens Delete Project button
   $scope.confirmDeleteProject = function(id) {
     var projectToDelete = $('#' + id);
     var deleteButton = projectToDelete.children('.delete-project');
@@ -178,6 +194,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     }
   }
 
+  // Deletes project
   $scope.deleteProject = function(id) {
     var projectToDelete = $('#' + id);
     var deleteConfirmButton = projectToDelete.children('.delete-confirm').children('.delete-confirm-cross');
@@ -192,6 +209,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     });
   }
 
+  // Saves project entered in New Project overlay
   $scope.saveNewProject = function() {
     if($scope.newProject.name) {
       $('.new-project-form').children().children('.btn').hide();
@@ -209,6 +227,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     }
   }
 
+  // Opens Modify Project overlay
   $scope.openModifyProject = function(id) {
     $('.modify-project-form').show();
     $('.dashboard-overlay').fadeIn();
@@ -217,6 +236,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     });
   }
 
+  // Saves project in Modify Project overlay
   $scope.updateProject = function(id) {
     $('.modify-project-form').children().children('.btn').hide();
     $http.put('/api/projects/' + id, $scope.modifyProject, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
@@ -230,6 +250,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     });
   }
 
+  // Displays photo delete buttons
   $scope.prepareDeletePhoto = function(id) {
     var deleteButtons = $('#' + id).children('.project-images').children('.project-photo').children('.photo-delete-button');
     var mainDeleteButton = $('#' + id).children('.prepare-delete-photo');
@@ -248,6 +269,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     }
   }
 
+  // Deletes selected photo
   $scope.deletePhoto = function(photo, id) {
     if(photo === "/images/placeholder.jpg") {
       photo = photo.substring(8);
