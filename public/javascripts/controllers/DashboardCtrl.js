@@ -64,7 +64,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     }
     else if(newPassword == newPasswordCheck) {
       $('.change-password-form').children().children('.btn').hide();
-      $http.put('/api/change-pw/' + userId, $scope.changePassword).then(function(data) {
+      $http.put('/api/change-pw/' + userId, $scope.changePassword, {headers: {'X-Access-Token' : store.get('token')}}).then(function(data) {
         $scope.passwordMessage = data.data.message;
         $timeout(function() {
           $scope.changePassword = {};
@@ -73,8 +73,7 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
           $('.dashboard-overlay').fadeOut();
         }, 2000);
       }, function(data) {
-        $scope.passwordMessage = data.data.message;
-        $('.change-password-form').children().children('.btn').show();
+        $window.location.href = '/dashboard';
       });
     }
   }
@@ -82,12 +81,14 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
   $scope.saveNewPost = function() {
     if($scope.newPost.title && $scope.newPost.text) {
       $('.new-post-form').children().children('.btn').hide();
-      $http.post('/api/news', $scope.newPost).then(function() {
+      $http.post('/api/news', $scope.newPost, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
         $scope.newPost = {};
         $('.new-post-form').children().children('.btn').show();
         $('.dashboard-form').hide();
         $('.dashboard-overlay').fadeOut();
         getNews();
+      }, function(data) {
+        $window.location.href = '/dashboard';
       });
     } else {
       console.log("Missing data.");
@@ -104,12 +105,14 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
 
   $scope.updatePost = function(id) {
     $('.modify-post-form').children().children('.btn').hide();
-    $http.put('/api/news/' + id, $scope.modifyPost).then(function() {
+    $http.put('/api/news/' + id, $scope.modifyPost, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
       $scope.modifyPost = {};
       $('.modify-post-form').children().children('.btn').show();
       $('.dashboard-form').hide();
       $('.dashboard-overlay').fadeOut();
       getNews();
+    }, function(data) {
+      $window.location.href = '/dashboard';
     });
   }
 
@@ -144,8 +147,10 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
       .removeClass("fa-close")
       .addClass("fa-spinner")
       .addClass("spinning");
-    $http.delete('/api/news/' + id).then(function() {
+    $http.delete('/api/news/' + id, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
       getNews();
+    }, function(data) {
+      $window.location.href = '/dashboard';
     });
   }
 
@@ -180,20 +185,24 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
       .removeClass("fa-close")
       .addClass("fa-spinner")
       .addClass("spinning");
-    $http.delete('/api/projects/' + id).then(function() {
+    $http.delete('/api/projects/' + id, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
       getProjects();
+    }, function(data) {
+      $window.location.href = '/dashboard';
     });
   }
 
   $scope.saveNewProject = function() {
     if($scope.newProject.name) {
       $('.new-project-form').children().children('.btn').hide();
-      $http.post('/api/projects', $scope.newProject).then(function() {
+      $http.post('/api/projects', $scope.newProject, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
         $scope.newProject = {};
         $('.new-project-form').children().children('.btn').show();
         $('.dashboard-form').hide();
         $('.dashboard-overlay').fadeOut();
         getProjects();
+      }, function(data) {
+        $window.location.href = '/dashboard';
       });
     } else {
       console.log("Missing data.");
@@ -210,12 +219,14 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
 
   $scope.updateProject = function(id) {
     $('.modify-project-form').children().children('.btn').hide();
-    $http.put('/api/projects/' + id, $scope.modifyProject).then(function() {
+    $http.put('/api/projects/' + id, $scope.modifyProject, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
       $scope.modifyProject = {};
       $('.modify-project-form').children().children('.btn').show();
       $('.dashboard-form').hide();
       $('.dashboard-overlay').fadeOut();
       getProjects();
+    }, function(data){
+      $window.location.href = '/dashboard';
     });
   }
 
@@ -243,8 +254,10 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     } else {
       photo = photo.substring(16);
     }
-    $http.post("/api/projects/" + id + "/rem-image/" + photo).then(function() {
+    $http.delete("/api/projects/" + id + "/rem-image/" + photo, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
       getProjects();
+    }, function(data) {
+      $window.location.href = '/dashboard';
     });
   }
 }

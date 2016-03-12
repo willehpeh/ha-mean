@@ -6,11 +6,38 @@ var User = require('../app/models/user');
 var Post = require('../app/models/post');
 var path = require('path');
 var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart({uploadDir: path.join(__dirname, "../public/images/tmp")});
 var fs = require('fs-extra');
 
 var config = require('../config/config');
+
+var tokenMiddleware = function(req, res, next) {
+  console.log(req.headers);
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+
+    // verifies secret and checks exp
+    jwt.verify(token, config.secret, function(err, decoded) {
+      if (err) {
+        console.log("Token invalid.");
+        return res.status(401).send({errorMessage: "Token expiré."});
+      } else {
+        console.log("Token valid, success!");
+        req.body.token = token;
+        next();
+      }
+    });
+
+  } else {
+
+    // if there is no token
+    // return an error
+    console.log("No token.")
+    return res.status(401).send({errorMessage: "Merci de vous identifier."});
+  }
+}
 
 // =============================================================================
 //                                 HOME PAGE
@@ -44,7 +71,7 @@ router.route('/projects')
   })
 
   // CREATE NEW PROJECT, AUTH
-  .post(function(req, res, next) {
+  .post(tokenMiddleware, function(req, res, next) {
     var project = new Project();
 
     project.name = req.body.name;
@@ -78,7 +105,7 @@ router.route('/projects/:id')
     });
   })
   // MODIFY PROJECT, AUTH
-  .put(function(req, res, next) {
+  .put(tokenMiddleware, function(req, res, next) {
     Project.findById(req.params.id, function(err, project) {
       if(err) {
         res.send(500, err);
@@ -103,7 +130,7 @@ router.route('/projects/:id')
   })
 
   // DELETE PROJECT, AUTH
-  .delete(function(req, res, next) {
+  .delete(tokenMiddleware, function(req, res, next) {
     Project.remove({_id: req.params.id}, function(err) {
       if(err) {
         res.status(500).send(err);
@@ -147,7 +174,7 @@ router.route('/projects/:id/add-image')
   });
 
 router.route('/projects/:id/rem-image/:photo')
-  .post(function(req, res, next) {
+  .delete(tokenMiddleware, function(req, res, next) {
     if(!req.params.id || !req.params.photo) {
       return res.status(400).send({message: "Bad request."});
     }
@@ -216,7 +243,7 @@ router.route('/news')
     });
   })
   // CREATE NEW NEWS ITEM, AUTH
-  .post(function(req, res, next) {
+  .post(tokenMiddleware, function(req, res, next) {
     var post = new Post();
     if(
       !req.body.title ||
@@ -250,7 +277,7 @@ router.route('/news/:id')
   })
 
   // MODIFY NEWS ITEM, AUTH
-  .put(function(req, res, next) {
+  .put(tokenMiddleware, function(req, res, next) {
     Post.findById(req.params.id, function(err, post) {
       if(err) {
         res.send(500, err);
@@ -276,7 +303,7 @@ router.route('/news/:id')
   })
 
   // DELETE NEWS ITEM, AUTH
-  .delete(function(req, res, next) {
+  .delete(tokenMiddleware, function(req, res, next) {
     Post.remove({_id: req.params.id}, function(err) {
       if(err) {
         res.send(err);
@@ -290,7 +317,7 @@ router.route('/news/:id')
 // =============================================================================
 
 router.route('/change-pw/:id')
-  .put(function(req, res, next) {
+  .put(tokenMiddleware, function(req, res, next) {
     User.findById(req.params.id, function(err, user) {
       if(err) {
         res.send(500, err);
