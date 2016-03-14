@@ -122,7 +122,7 @@ function ProjectDetailCtrl($scope, $http, $window, $location, $interval) {
     function(data) {
       $scope.project = data.data;
       $scope.photoArray = $scope.project.photos;
-      $scope.smallArray = $scope.photoArray.slice(0, 4);
+      $scope.smallArray = $scope.photoArray.slice(0, 2);
       container.css({
         'background-image' : 'url(' + $scope.photoArray[0] + ')'
       });
