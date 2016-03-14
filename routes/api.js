@@ -10,6 +10,8 @@ var jwt = require('jsonwebtoken');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart({uploadDir: path.join(__dirname, "../public/images/tmp")});
 var fs = require('fs-extra');
+var nodemailer = require('nodemailer');
+
 
 var config = require('../config/config');
 
@@ -52,6 +54,45 @@ router.route('/home')
         res.status(500).send(err);
       }
       res.send(data);
+    });
+  });
+
+// =============================================================================
+//                                 CONTACT FORM
+// =============================================================================
+
+router.route('/contact')
+  .post(function(req, res) {
+    var name = req.body.name;
+    var phone = req.body.phone;
+    var address = req.body.email;
+    var text = req.body.text;
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'dev.ha.architecture@gmail.com', // Your email id
+            pass: '5namsyuH' // Your password
+        }
+    });
+    var mailOptions = {
+    from: address, // sender address
+    to: 'huysmans@ha-architecture.fr', // list of receivers
+    subject: 'Message de ' + name, // Subject line
+    text: 'Nom : ' + name + '\n' +
+          'Téléphone : ' + phone + '\n' +
+          'Email : ' + address + '\n' +
+          'Message : ' + '\n' +
+          text
+    }
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error) {
+        console.log(error);
+        res.json({yo: 'error'});
+      } else {
+        console.log('Message sent: ' + info.response);
+        res.json({yo: info.response});
+      };
     });
   });
 

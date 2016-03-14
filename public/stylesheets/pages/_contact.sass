@@ -3,7 +3,7 @@
   margin-top: 70px
   margin-left: 5%
   width: 90%
-  background-color: rgba(white, 0.6)
+  background-color: rgba(white, 0.9)
   padding: 20px
   display: flex
   border-radius: 5px
@@ -14,6 +14,8 @@
   width: 50%
   @include phone
     width: 100%
+  input, textarea
+    background-color: rgba(white, 0.9)
 
 .contact-map
   width: 50%
@@ -21,4 +23,14 @@
     margin-top: 30px
     width: 100%
 
-.contact-text-container
+.contact-info
+  display: flex
+  align-items: center
+
+.contact-info-section
+  margin-right: 40px
+  a
+    color: $text
+
+.contact-form
+  margin-top: 30px

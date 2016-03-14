@@ -3,6 +3,7 @@ angular.module('ha-mean-angular').controller('ProjectDetailCtrl', ProjectDetailC
 angular.module('ha-mean-angular').controller('NewsCtrl', NewsCtrl);
 angular.module('ha-mean-angular').controller('PostCtrl', PostCtrl);
 angular.module('ha-mean-angular').controller('HomeCtrl', HomeCtrl);
+angular.module('ha-mean-angular').controller('ContactCtrl', ContactCtrl);
 
 
 // Home page controller
@@ -165,4 +166,17 @@ function PostCtrl($scope, $http, $window, $location) {
       console.log(data.data);
     }
   )
+}
+
+function ContactCtrl($scope, $http) {
+  $scope.sendEmail = function() {
+    $http.post('/api/contact', $scope.contact).then(
+      function(data) {
+        $scope.sentMessage = "Message envoyé.";
+        $scope.contact = {};
+      }, function(data) {
+        $scope.sentMessage = "Une erreur est survenue."
+      }
+    );
+  }
 }
