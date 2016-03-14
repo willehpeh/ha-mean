@@ -1,0 +1,43 @@
+doctype html
+html(ng-app="ha-mean-angular")
+  head
+    title H&A Architecture - #{title}
+    meta(charset="utf-8")
+    meta(name="viewport",content="width=device-width")
+    link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css")
+    link(rel="stylesheet" href="/stylesheets/main.min.css")
+  body
+    .print-container(ng-controller="ProjectDetailCtrl")
+      .print-top-row
+        .print-top-center
+          h1 {{project.name}}
+          h4 {{project.year}}
+          h5 {{project.status}}
+        .print-top-right
+          h2 {{project.client}}
+          h4 SURFACE : {{project.surface}}
+          h4 {{project.address}}
+      .print-bottom-row
+        .print-photos
+          .print-photo(ng-repeat="photo in smallArray")
+            img(src="{{photoArray[$index]}}")
+        .print-description
+          h4 {{project.description}}
+          br
+          br
+          h3 {{project.characteristics}}
+
+
+  script(src="/libs/jquery/dist/jquery.min.js")
+  script(src="/libs/angular/angular.min.js")
+  script(src="/libs/angular-route/angular-route.min.js")
+  script(src="/libs/ng-file-upload/ng-file-upload.min.js")
+  script(src="/libs/ng-file-upload/ng-file-upload-all.min.js")
+  script(src="/libs/ng-file-upload/ng-file-upload-shim.js")
+  script(src="/libs/a0-angular-storage/dist/angular-storage.min.js")
+  script(src="/libs/angular-animate/angular-animate.min.js")
+  script(src="https://code.createjs.com/preloadjs-0.6.2.min.js")
+  script(src="/javascripts/app.js")
+  script(src="/javascripts/controllers/public-controllers.js")
+  script(src="/javascripts/functions.js")

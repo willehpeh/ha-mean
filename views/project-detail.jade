@@ -15,6 +15,10 @@ block content
       .slideshow-prev-button(ng-click="prevImage()")
         .fa.fa-angle-left.fa-3x
     .project-info-container
+      a(href="/print-project/?id={{project._id}}" target="_new")
+        .printable
+          h5 Version imprimable &nbsp;
+          span.fa.fa-print.fa-2x
       h1.project-name {{project.name}}
       h4.project-name {{project.characteristics}}
       .project-details

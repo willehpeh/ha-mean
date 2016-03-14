@@ -16,6 +16,11 @@ router.get('/project-detail', function(req, res, next) {
   res.render('project-detail');
 });
 
+// GET printable project page
+router.get('/print-project', function(req, res, next) {
+  res.render('print-project');
+});
+
 // GET main news page
 router.get('/news', function(req, res, next) {
   res.render('news', { title: 'Actualités' });
