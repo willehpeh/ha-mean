@@ -28,22 +28,22 @@ block content
           form(name="contactForm")
             label Votre nom
             br
-            input(type="text" ng-model="contact.name")
+            input(type="text" ng-model="contact.name" size="30")
             br
             br
             label Votre numéro de téléphone
             br
-            input(type="text" ng-model="contact.phone")
+            input(type="text" ng-model="contact.phone" size="30")
             br
             br
             label Votre adresse mail
             br
-            input(type="text" ng-model="contact.email")
+            input(type="text" ng-model="contact.email" size="30")
             br
             br
             label Votre message
             br
-            textarea(cols="40" rows="10" ng-model="contact.text")
+            textarea(cols="30" rows="10" ng-model="contact.text" size="30")
             br
             br
             button.btn(ng-click="sendEmail()") Envoyer
