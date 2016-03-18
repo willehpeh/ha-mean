@@ -6,6 +6,9 @@
   margin-top: 70px
   padding: 25px
   background-color: rgba(white, 0.9)
+  @include phone
+    width: 100%
+    margin-left: 0%
 
   p
     line-height: 1.6em
@@ -21,6 +24,8 @@
   margin-right: 4%
   margin-bottom: 2%
   height: auto
+  @include phone
+    width: 100%
   img
     width: 100%
     max-width: 100%
@@ -33,6 +38,8 @@
   -webkit-display: flex
   width: 100%
   align-items: center
+  @include phone
+    display: inline
 
 .agency-presentation-left-paragraph
   width: 55%
