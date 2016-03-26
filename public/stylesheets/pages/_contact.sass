@@ -1,4 +1,5 @@
 .contact-main-container
+  position: relative
   box-sizing: border-box
   margin-top: 70px
   margin-left: 5%
@@ -12,6 +13,8 @@
     padding: 10px
     width: 100%
     margin-left: 0%
+    padding-bottom: 40px
+    text-align: center
 
 .contact-text-container
   width: 50%
@@ -34,8 +37,26 @@
 
 .contact-info-section
   margin-right: 40px
+  @include phone
+    margin-right: 0px
   a
     color: $text
 
 .contact-form
   margin-top: 30px
+  @include phone
+    text-align: center
+  input, textarea
+    width: 95%
+    @include phone
+      width: 80%
+
+.contact-webmaster
+  position: absolute
+  bottom: 0px
+  right: 10px
+  p
+    font-size: 0.8em
+    font-style: italic
+  a
+    color: $text

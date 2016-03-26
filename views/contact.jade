@@ -15,7 +15,6 @@ block content
             p Tel : 01 30 06 33 33
               br
               | Fax: 01 30 06 33 30
-          .contact-info-section
             p Email : 
               a(href="mailto:auffret@ha-architecture.fr") auffret@ha-architecture.fr
               br
@@ -28,22 +27,22 @@ block content
           form(name="contactForm")
             label Votre nom
             br
-            input(type="text" ng-model="contact.name" size="30")
+            input(type="text" ng-model="contact.name")
             br
             br
             label Votre numéro de téléphone
             br
-            input(type="text" ng-model="contact.phone" size="30")
+            input(type="text" ng-model="contact.phone")
             br
             br
             label Votre adresse mail
             br
-            input(type="text" ng-model="contact.email" size="30")
+            input(type="text" ng-model="contact.email")
             br
             br
             label Votre message
             br
-            textarea(cols="30" rows="10" ng-model="contact.text" size="30")
+            textarea(rows="10" ng-model="contact.text")
             br
             br
             button.btn(ng-click="sendEmail()") Envoyer
@@ -52,3 +51,6 @@ block content
             p {{sentMessage}}
       .contact-map
         iframe(src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2621.2483693126323!2d2.0412258508237793!3d48.92971100353537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6896f208e9489%3A0x3229c33dd0e58e3d!2s23+Rue+Sandrier%2C+78300+Poissy!5e0!3m2!1sen!2sfr!4v1457962593179" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen)
+      .contact-webmaster
+        p Site Web créé par 
+          a(href="mailto:will_alexander@me.com?subject=HA-Archi") Will Alexander
