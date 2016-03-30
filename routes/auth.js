@@ -7,8 +7,8 @@ var jwt = require('jsonwebtoken');
 
 var config = require('../config/config');
 
-// Allow new users to sign up
-router.route('/signup')
+// Allow new users to sign up (reactivate only if necessary)
+/*router.route('/signup')
   .post(function(req, res, next) {
 
     // Retrieve username and password from request
@@ -49,6 +49,7 @@ router.route('/signup')
       }
     });
   });
+*/
 
 router.route('/login')
   .get(function(req, res, next) {
