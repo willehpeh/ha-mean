@@ -14,7 +14,7 @@ block content
         input#public(type="checkbox" value="public" checked)
         span.dark-yellow-text.label-text Bâtiments publics
     .project-grid
-      .project-grid-item(ng-repeat="project in projects | orderBy:'created_at':true" ng-class="project.family" ng-style="{'background-image': 'url(' + project.photos[0] + ')'}")
+      .project-grid-item(ng-repeat="project in projects | orderBy:'year':true" ng-class="project.family" ng-style="{'background-image': 'url(' + project.photos[0] + ')'}")
         .info-box
           p.project-grid-title {{project.name}}
           p.small-address {{project.address}}
