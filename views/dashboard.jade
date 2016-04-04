@@ -12,9 +12,12 @@ html(ng-app="ha-mean-angular")
       include ./partials/_new-project-form.jade
       include ./partials/_modify-project-form.jade
       include ./partials/_change-password.jade
+      include ./partials/_add-homepage-photo.jade
     h1(align="center") {{title}}
-    button.change-password-button.btn.btn-warning(ng-click="openChangePassword()") Modifier mot de passe
-    button.logout.btn.btn-danger(ng-click="logout()") Se déconnecter
+    .top-buttons
+      button.btn.btn-success(ng-click="openAddHomepagePhoto()") Page d'accueil
+      button.btn.btn-warning(ng-click="openChangePassword()") Modifier mot de passe
+      button.btn.btn-danger(ng-click="logout()") Se déconnecter
     .dashboard-container
       .dashboard-news
         h2(align="center") Actualités

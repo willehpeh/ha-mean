@@ -11,14 +11,14 @@ function HomeCtrl($scope, $http, $timeout, $interval) {
   $http.get('/api/home').then(
     function(data) {
       $scope.data = data.data;
+      console.log('Data: ' + $scope.data);
       $scope.photoArray = [];
       var container = $('.background-container');
       var index = 0;
       for(i=0;i<$scope.data.length;i++) {
-        for(j=0;j<$scope.data[i].photos.length;j++) {
-          $scope.photoArray.push($scope.data[i].photos[j]);
-        }
+        $scope.photoArray.push($scope.data[i].url);
       }
+      console.log('Photo array: ' + $scope.photoArray);
 
       container.css({
         'background-image' : 'url(' + $scope.photoArray[index] + ')'

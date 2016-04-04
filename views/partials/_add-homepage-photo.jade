@@ -1,0 +1,16 @@
+.dashboard-form.add-homepage-photo
+  h3 Ajouter images (accueil)
+  
+  button.btn.btn-success.btn-sm( 
+    ngf-select="uploadHome($file, project._id)" 
+    ngf-pattern="'image/*'" 
+    ngf-accept="'image/*'"
+    ngf-resize="{width: 1200, height: 900, quality: .8, centerCrop: false}") Ajouter une image 
+  button.btn.btn-danger.btn-sm.prepare-delete-homepage-photo(ng-click="prepareDeleteHomepagePhoto()") Supprimer une image
+  .project-images.homepage-images
+    .project-photo(ng-repeat="photo in homepagePhotos") 
+      img(ng-src="{{photo.url}}")
+      .photo-delete-button.fa.fa-close.fa-2x(ng-click="deleteHomepagePhoto(photo._id)")
+    .progress.upload-progress
+      .progress-bar
+  button.btn.btn-success.close-dashboard-overlay.homepage-done Terminé

@@ -26,6 +26,59 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     );
   }
 
+  // Upload image to homepage
+  $scope.uploadHome = function(file) {
+    Upload.upload({
+      url: "api/home/image/new",
+      data: {file: file}
+    }).then(function() {
+        $('.homepage-images').children('.progress').last().hide();
+        getHomepage();
+      }, function(err) {
+
+      }, function(evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        $('.homepage-images').children('.progress').last().show();
+        $('.homepage-images').children('.progress').last().children('.progress-bar').css({
+          "width" : progressPercentage
+        }).html(progressPercentage);
+      }
+    );
+  }
+
+  // Show delete buttons
+  $scope.prepareDeleteHomepagePhoto = function(id) {
+    var deleteButtons = $('.homepage-images').children('.project-photo').children('.photo-delete-button');
+    var mainDeleteButton = $('.prepare-delete-homepage-photo');
+    if(deleteButtons.is(':hidden')) {
+      deleteButtons.fadeIn();
+      mainDeleteButton
+        .removeClass('btn-danger')
+        .addClass('btn-warning')
+        .html('Terminé');
+    } else {
+      deleteButtons.fadeOut();
+      mainDeleteButton
+        .addClass('btn-danger')
+        .removeClass('btn-warning')
+        .html('Supprimer une image');
+    }
+  }
+
+  // Deletes selected photo
+  $scope.deleteHomepagePhoto = function(id) {
+    var mainDeleteButton = $('.prepare-delete-homepage-photo');
+    $http.delete("/api/home/image/" + id, {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
+      mainDeleteButton
+        .addClass('btn-danger')
+        .removeClass('btn-warning')
+        .html('Supprimer une image');
+      getHomepage();
+    }, function(data) {
+      $window.location.href = '/dashboard';
+    });
+  }
+
   // Refresh projects
   var getProjects = function() {
     $http.get('/api/projects/').then(
@@ -46,8 +99,18 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     });
   }
 
+  // Refresh homepage pictures
+  var getHomepage = function() {
+    $http.get('/api/home').then(function(data) {
+      $scope.homepagePhotos = data.data;
+    }, function(data) {
+      console.log(data);
+    });
+  }
+
   getProjects();
   getNews();
+  getHomepage();
 
 
   // Logout of Dashboard
@@ -104,6 +167,16 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     } else {
       console.log("Missing data.");
     }
+  }
+
+  // Opens Add Picture overlay
+  $scope.openAddHomepagePhoto = function(id) {
+    $('.add-homepage-photo').show();
+    $('.dashboard-overlay').fadeIn();
+    $http.get('/api/home').then(function(data) {
+      $scope.homepageData = data.data;
+      console.log($scope.homepageData);
+    });
   }
 
   // Opens Modify Post overlay

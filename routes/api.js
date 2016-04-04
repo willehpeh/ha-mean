@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Project = require('../app/models/project');
 var User = require('../app/models/user');
 var Post = require('../app/models/post');
+var HomepagePhoto = require('../app/models/homepage');
 var path = require('path');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
@@ -47,13 +48,49 @@ var tokenMiddleware = function(req, res, next) {
 
 router.route('/home')
   .get(function(req, res, next) {
-    Project.find({
-      front_page: true
-    }, function(err, data) {
+    HomepagePhoto.find(function(err, data) {
       if(err) {
         res.status(500).send(err);
       }
       res.send(data);
+    });
+  });
+
+router.route('/home/image/new')
+  .post(multipartMiddleware, function(req, res, next) {
+    var file = req.files.file;
+    file.name = file.name.replace(/\s/g, "");
+    var uploadDate = new Date().toISOString();
+    uploadDate = uploadDate.replace(/-/g, "");
+    uploadDate = uploadDate.replace(/:/g, "");
+    uploadDate = uploadDate.replace(/\./g, "");
+    uploadDate = uploadDate.replace(/_/g, "");
+    var tempPath = file.path;
+    var targetPath = path.join(__dirname, "../public/images/uploads/" + uploadDate + file.name);
+    var savePath = "/images/uploads/" + uploadDate + file.name;
+
+    fs.rename(tempPath, targetPath, function(err) {
+      if(err) {
+        return res.status(500).send(err);
+      }
+      var homepagePhoto = new HomepagePhoto();
+      homepagePhoto.url = savePath;
+      homepagePhoto.save(function(err, homepagePhoto) {
+        if(err) {
+          return res.status(500).send(err);
+        }
+        return res.status(200).send(homepagePhoto);
+      });
+    });
+  })
+
+router.route('/home/image/:id')
+  .delete(tokenMiddleware, function(req, res, next) {
+    HomepagePhoto.remove({_id: req.params.id}, function(err) {
+      if(err) {
+        res.send(err);
+      }
+      res.send("Photo removed.")
     });
   });
 
