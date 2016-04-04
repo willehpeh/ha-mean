@@ -5,7 +5,7 @@
     ngf-select="uploadHome($file, project._id)" 
     ngf-pattern="'image/*'" 
     ngf-accept="'image/*'"
-    ngf-resize="{width: 1200, height: 900, quality: 1.0, centerCrop: false}") Ajouter une image 
+    ngf-resize="{width: 1600, height: 1100, quality: 1.0, centerCrop: false}") Ajouter une image 
   button.btn.btn-danger.btn-sm.prepare-delete-homepage-photo(ng-click="prepareDeleteHomepagePhoto()") Supprimer une image
   .project-images.homepage-images
     .project-photo(ng-repeat="photo in homepagePhotos") 
