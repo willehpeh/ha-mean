@@ -46,6 +46,26 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     );
   }
 
+  // Upload image to news item
+  $scope.uploadNews = function(file, id) {
+    Upload.upload({
+      url: "api/news/" + id + "/add-image",
+      data: {file: file}
+    }).then(function() {
+        $('.news-images').children('.progress').last().hide();
+        getNews();
+      }, function(err) {
+
+      }, function(evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        $('.news-images').children('.progress').last().show();
+        $('.news-images').children('.progress').last().children('.progress-bar').css({
+          "width" : progressPercentage
+        }).html(progressPercentage);
+      }
+    );
+  }
+
   // Show delete buttons
   $scope.prepareDeleteHomepagePhoto = function(id) {
     var deleteButtons = $('.homepage-images').children('.project-photo').children('.photo-delete-button');

@@ -392,6 +392,42 @@ router.route('/news/:id')
     });
   });
 
+
+router.route('/news/:id/add-image')
+  // ADD PHOTO TO NEWS ITEM
+  .post(multipartMiddleware, function(req, res, next) {
+    var file = req.files.file;
+    file.name = file.name.replace(/\s/g, "");
+    var uploadDate = new Date().toISOString();
+    uploadDate = uploadDate.replace(/-/g, "");
+    uploadDate = uploadDate.replace(/:/g, "");
+    uploadDate = uploadDate.replace(/\./g, "");
+    uploadDate = uploadDate.replace(/_/g, "");
+    var tempPath = file.path;
+    var targetPath = path.join(__dirname, "../public/images/uploads/" + uploadDate + file.name);
+    var savePath = "/images/uploads/" + uploadDate + file.name;
+
+    fs.rename(tempPath, targetPath, function(err) {
+      if(err) {
+        return res.status(500).send(err);
+      }
+      Post.findById(req.params.id, function(err, post) {
+        if(err) {
+          return res.status(500).send(err);
+        }
+        post.photo = savePath;
+        post.save(function(err, post) {
+          if(err) {
+            return res.status(500).send(err);
+          }
+          return res.status(200).send(post);
+        });
+      });
+    });
+  });
+
+
+
 // =============================================================================
 //                                   USERS
 // =============================================================================

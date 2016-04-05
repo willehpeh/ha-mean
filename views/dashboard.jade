@@ -27,6 +27,16 @@ html(ng-app="ha-mean-angular")
             .delete-confirm-cross.fa.fa-close
           h3 {{post.title}}
           p {{post.text}}
+          button.btn.btn-success.btn-sm( 
+            ngf-select="uploadNews($file, post._id)" 
+            ngf-pattern="'image/*'" 
+            ngf-accept="'image/*'"
+            ngf-resize="{width: 1200, height: 900, quality: .8, centerCrop: false}"
+            ng-if="!post.photo") Ajouter l'image
+          .news-images
+            img(ng-src="{{post.photo}}")
+            .progress.upload-progress
+              .progress-bar
           button.btn.btn-success.modify-post(ng-click="openModifyPost(post._id)") Modifier
           button.btn.btn-danger.delete-post(ng-click="confirmDeletePost(post._id)") Supprimer
       .dashboard-projects

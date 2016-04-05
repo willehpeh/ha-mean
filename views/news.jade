@@ -9,4 +9,5 @@ block content
         h3.news-title {{post.title}}
         .date
           p.date-text Mis à jour le {{post.day}}-{{post.month}}-{{post.year}} à {{post.time}}
+        img(class="news-image" ng-src="{{post.photo}}")
         p {{post.text}}
