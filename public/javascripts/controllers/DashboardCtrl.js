@@ -99,6 +99,12 @@ function DashboardCtrl($scope, $http, store, $window, Upload, $timeout) {
     });
   }
 
+  $scope.deleteNewsPhoto = function(id) {
+    $http.delete("/api/news/" + id + "/rem-image", {headers: {'X-Access-Token' : store.get('token')}}).then(function() {
+      getNews()
+    });
+  }
+
   // Refresh projects
   var getProjects = function() {
     $http.get('/api/projects/').then(

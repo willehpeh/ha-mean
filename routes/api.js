@@ -426,6 +426,38 @@ router.route('/news/:id/add-image')
     });
   });
 
+  router.route('/news/:id/rem-image/')
+    .delete(tokenMiddleware, function(req, res, next) {
+      if(!req.params.id) {
+        return res.status(400).send({message: "Bad request."});
+      }
+      var id = req.params.id;
+
+      Post.findById(id, function(err, post) {
+        if(err) {
+          return res.status(500).send(err);
+        }
+        var photo = post.photo;
+        post.photo = "";
+        console.log("Photo removed from post.");
+        post.save(function(err, post) {
+          if(err) {
+            return res.status(500).send(err);
+          }
+          console.log("Post saved.");
+
+          var photoToDelete = path.join(__dirname, "../public" + photo);
+
+          fs.remove(photoToDelete, function (err) {
+            if(err) {
+              return res.status(500).send(err);
+            }
+            console.log("Photo deleted.");
+            return res.status(200).send({message: "Request complete."});
+          });
+        });
+      });
+    });
 
 
 // =============================================================================

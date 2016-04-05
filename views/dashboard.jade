@@ -33,6 +33,7 @@ html(ng-app="ha-mean-angular")
             ngf-accept="'image/*'"
             ngf-resize="{width: 1200, height: 900, quality: .8, centerCrop: false}"
             ng-if="!post.photo") Ajouter l'image
+          button.btn.btn-danger.btn-sm(ng-if="post.photo" ng-click="deleteNewsPhoto(post._id)") Supprimer l'image
           .news-images
             img(ng-src="{{post.photo}}")
             .progress.upload-progress
