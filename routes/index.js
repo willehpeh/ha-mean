@@ -41,6 +41,11 @@ router.get('/contact', function(req, res, next) {
   res.render('contact', { title: 'Contact' });
 });
 
+// GET partners page
+router.get('/partners', function(req, res, next) {
+  res.render('partners', { title: 'Nos Partenaires'})
+});
+
 // Render Jade partials as HTML for Angular frontend
 router.get('/partials/:name', function (req, res) {
   var name = req.params.name;
